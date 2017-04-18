@@ -15,9 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
-        for(int x=0;x<3;x++) {
+        for(int x=0;x<1;x++) {
             ImageView image = new ImageView(MainActivity.this);
+
             image.setBackgroundResource(R.drawable.images1);
+
             linearLayout1.addView(image);
         }
     }
