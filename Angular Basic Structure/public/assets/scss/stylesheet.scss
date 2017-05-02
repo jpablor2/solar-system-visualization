@@ -1,0 +1,18 @@
+@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../bower_components/font-awesome/scss/font-awesome';
+@import "variables";
+
+@import "account";
+@import "button";
+@import "error";
+@import "navbar";
+@import "utilities";
+
+html *
+{
+  border-radius: 0 !important;
+
+}
+
+
+

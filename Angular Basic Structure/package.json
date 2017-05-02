@@ -1,0 +1,36 @@
+{
+  "name": "busquedas_app",
+  "version": "1.0.0",
+  "description": "This project will generate and evaluate different algorithms ",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "jsonfile": "^2.4.0",
+    "materialize-css": "^0.98.2",
+    "method-override": "^2.3.8",
+    "newman": "^3.5.2"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jpablor2/busquedas_app.git"
+  },
+  "keywords": [
+    "busquedas",
+    "IA",
+    "tec"
+  ],
+  "author": "Juan Pablo Rodriguez Rojas",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://gitlab.com/jpablor2/busquedas_app/issues"
+  },
+  "homepage": "https://gitlab.com/jpablor2/busquedas_app#README"
+}

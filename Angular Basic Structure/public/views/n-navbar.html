@@ -1,0 +1,70 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ng-click="tab.setTab(0)" ui-sref=".login"><i class="fa fa-terminal fa-lg" aria-hidden="true"></i>  Algoritmos de Busqueda</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>-->
+      </ul>
+      <!--
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li  ng-class="{ active:tab.isSet(1) }" data-toggle="tooltip"  title="Creación manual del grafo"><a ng-click="tab.setTab(1)" ui-sref=".manual" >Creacion manual</a></li>
+        <li ng-class="{ active:tab.isSet(2) }" data-toggle="tooltip"  title="Creación automática del grafo"><a ng-click="tab.setTab(2)" ui-sref=".automatic">Creacion automática</a></li>
+        <li ng-class="{ active:tab.isSet(3) }" data-toggle="tooltip"  title="Carga del grafo"><a ng-click="tab.setTab(3)" ui-sref=".loaded">Cargar grafo</a></li>
+        
+        
+        <li class="dropdown " data-toggle="tooltip"  title="Debe crear primero el grafo" ng-class="{ active:tab.isSet(4) }">
+          <a ng-click="tab.setTab(4)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sitemap" aria-hidden="true"></i> Algoritmos <span class="caret"></span></a>
+          <ul class="dropdown-menu ">
+           <li class="disabled"><a><strong>Busquedas sin información</strong></a></li>
+            <li><a ng-click="tab.setearAlgoritmo('DFS')">Depth-First Search (DFS)</a></li>
+            <li><a ng-click="tab.setearAlgoritmo('DLS')">Depth-Limited Search(DLS)</a></li>
+            <li><a ng-click="tab.setearAlgoritmo('IDS')"> Iterative Deepening Search (IDS) </a></li>
+            <li><a ng-click="tab.setearAlgoritmo('BFS')"> Breadth-First Search (BFS) </a></li>
+            <li><a ng-click="tab.setearAlgoritmo('BS')"> Bidirectional Search (BS)</a></li>
+            <li><a ng-click="tab.setearAlgoritmo('UCS')">  Uniform-Cost Search (UCS) </a></li>
+            <li role="separator" class="divider"></li>
+            <li class="disabled"><a><strong>Busquedas con información</strong></a></li>
+            <li><a ng-click="tab.setearAlgoritmo('BEST-FS')"> BEST-FIRST SEARCH (BEST-FS) </a></li>
+            <li><a ng-click="tab.setearAlgoritmo('AS')"> A* SEARCH (AS)</a></li>
+            <li><a ng-click="tab.setearAlgoritmo('HC')"> HILL-CLIMBING SEARCH (HC) </a></li>
+            <li><a ng-click="tab.setearAlgoritmo('SA')"> SIMULATED ANNEALING (SA) </a></li>
+            <li><a ng-click="tab.setearAlgoritmo('TS')"> TABU SEARCH (TS)</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ng-click="tab.clean()">Limpiar</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

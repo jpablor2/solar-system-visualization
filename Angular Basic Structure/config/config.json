@@ -1,0 +1,58 @@
+{
+    "use_sass": false,
+    "bases": {
+        "dist": "dist/",
+        "src": "src/"
+    },
+    "path": {
+        "scripts": [
+            "src/**/*.js",
+            "!src/bower_components/**"
+        ],
+        "js": [
+            "src/bower_components/angular/angular.min.js",
+            "src/bower_components/angular-ui-router/release/angular-ui-router.js",
+            "src/bower_components/angular-animate/angular-animate.min.js",
+            "src/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"
+        ],
+        "css": [
+            "src/css/**/*.css"
+        ],
+        "sass": {
+            "all": "src/scss/**/*.scss",
+            "src":"src/scss/stylesheet.scss",
+            "dist":  "dist/css"
+        },
+        "fonts": {
+            "bootstrap": "src/bower_components/bootstrap/dist/fonts/*",
+            "fontAwesome":  "src/bower_components/font-awesome/fonts/*"
+        },
+        "img":{
+            "src":[
+                "src/img/**/*"
+            ],
+            "dist":"dist/img"
+        },
+        "views": {
+            "src" :"src/views/**/*.jade",
+            "dist": "dist/views/",
+            "distHtml": "dist/views/**/*.html"
+
+        },
+        "singlefiles": [
+            "src/favicon.ico"
+        ],
+
+        "index":{
+            "src": "src/index.jade",
+            "dist": "dist/"
+        }
+    },
+    "serve": {
+        "root": "dist/",
+        "index": "dist/index.html",
+        "port": 3000,
+        "livereload": true
+
+    }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html ng-app="store2">
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inteligencia Artificial</title>
+
+    <!--GOOGLE MATERIALIZE LINKS 
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    -->
+
+    <!--ANGULAR LINKS -->
+    <link rel="stylesheet" type="text/css" href="bower_components/sass-bootstrap/dist/css/bootstrap.min.css" />
+    
+    <link rel="stylesheet" type="text/css" href="assets/css/application.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/file-picker.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
+    <!-- //--------------------------------------------SWEET_ALERT---------------------------------------------------// -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css">
+    
+</head>
+
+<body ng-controller="StoreController">
+    
+    <!--<cn-navbar></cn-navbar>-->
+    <!-- Solo para uno elemento <div ng-controller="StoreController as store">
+        <div ng-hide="store.product.canPurchase">
+           en vez de ng-hide <div ng-show="store.product.canPurchase">Add to Cart</div>
+            <h1>Product Name: {{store.product.name}}</h1>
+            <h2>$Product Price:  <em class="pull-right">{{store.product.price}}</em></h2>
+            <p>Product Description: {{store.product.description}}</p>
+            <button>Add to Cart</button>
+        </div>
+    </div> -->
+
+    <n-navbar></n-navbar>
+    <div id="main">
+
+        <div ui-view></div>
+
+    </div>
+    
+    
+    <!--
+    <div ng-controller="StoreController as store">
+        <div ng-repeat="product in store.products | orderBy:'-price'">
+
+            <h1>Product Name: {{product.name}}</h1>
+            
+            <img ng-src="{{product.images[0].full}}" />
+            
+            <h2>Product Price:  <em class="pull-right">{{product.price | currency}}</em></h2>
+            <p>Product Description: {{product.description}}</p>-->
+    <!--<button ng-show="product.c<></>anPurchase">Add to Cart</button>-->
+    <!--<br>
+            <br>
+            <section ng-controller="PanelController as panel">
+                <ul class="nav nav-pills">
+                    <li ng-class="{ active: panel.isSelected(1)}">
+                        <a href ng-click="panel.selectTab(1)">Description </a>
+                    </li>
+                    <li ng-class="{ active: panel.isSelected(2)}">
+                        <a href ng-click="panel.selectTab(2)">Specifications </a>
+                    </li>
+                    <li ng-class="{ active:panel.isSelected(3)}">
+                        <a href ng-click="panel.selectTab(3)">Reviews </a>
+                    </li>
+                </ul>
+
+                <div class="panel" ng-show="panel.isSelected(1)">
+                    <h4>Description </h4></div>
+                <div class="panel" ng-show="panel.isSelected(2)">
+                    <h4>Specifications </h4></div>
+                <div class="panel" ng-show="panel.isSelected(3)">
+                    <h4>Reviews</h4>
+                    <blockquote ng-repeat="review in product.reviews">
+                        <b>Stars: {{review.stars}}</b> {{review.body}}
+                        <cite>by: {{review.author}}</cite>
+
+                    </blockquote>
+                    <h4>Submit a review</h4>
+                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+                        <blockquote>
+                            <b>Stars: {{reviewCtrl.review.stars}}</b> {{reviewCtrl.review.body}}
+                            <cite>by: {{reviewCtrl.review.author}}</cite>
+                        </blockquote>
+                        <div class="form-group">
+                            <h6>Stars</h6>
+                            <select ng-model="reviewCtrl.review.stars" required>
+                                <option value="1">1 star</option>
+                                <option value="2">2 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="5">5 stars</option>
+                            </select>
+                            <br>
+                            <h6>Comment...</h6>
+                            <textarea ng-model="reviewCtrl.review.body" class="form-control" required></textarea>
+                            <br>
+                            <label>by:</label>
+                            <input ng-model="reviewCtrl.review.author" type="email" class="ng-pristine ng-invalid" required/>
+                            <br>
+                            <div>reviewForm is {{reviewForm.$valid}}</div>
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    </div>
+    <h3 product-title>adf</h3>-->
+
+
+
+    <!--ANGULAR SCRIPTS-->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <!--<script type="text/javascript" src="../../node_modules/angular/angular.min.js"></script>-->
+    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="./app/controllers/algoritmos.js"></script>
+    <script type="text/javascript" src="app/directives/product-title.js"></script>
+    <script type="text/javascript" src="app/directives/n-navbar.js"></script>
+    <script type="text/javascript" src="app/directives/file-picker.js"></script>
+    <!--<script type="text/javascript" src="../node_modules/jsonfile/index.js"></script>-->
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+    
+    <script type="text/javascript" src="bower_components/sass-bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="http://visjs.org/dist/vis.js"></script>
+
+    <!--MATERIALIZE SCRIPTS-->
+    <!--<script type="text/javascript" src="../../node_modules/materialize-css/dist/css/materialize.min.css"></script>-->
+    
+    <!-- //--------------------------------------------SWEET_ALERT---------------------------------------------------// -->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+
+</body>
+
+</html>

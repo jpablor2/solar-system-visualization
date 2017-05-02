@@ -1,0 +1,25 @@
+        {
+            nodes: [{
+                id: 0,
+                label: 'a'
+            }, {
+                id: 1,
+                label: 'b'
+            }, {
+                id: 2,
+                label: 'c'
+            }, ...N],
+            edges: [{
+                from: 0,
+                to: 1,
+                label: '1'
+            }, {
+                from: 0,
+                to: 2,
+                label: '2'
+            }, {
+                from: 1,
+                to: 2,
+                label: '3'
+            }, ...N]
+        }

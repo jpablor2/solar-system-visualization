@@ -1,0 +1,97 @@
+<!-- home.html -->
+
+<div class=" row text-center">
+    <h1>{{ title}}</h1>
+
+    <h4>{{ message }}</h4>
+</div>
+<br>
+<div class="row text-center ">
+    <hr>
+    <div class="divider"></div>
+    <div class="col-md-2 ">
+
+        <div class="panel panel-default">
+            <div class=" panel-heading ">
+                <h4>Información del grafo </h4></div>
+            <div class="panel-body">
+                <h5> Número de Nodos en el Gráfos <span class="label label-info">{{numeroGrafos}}</span></h5>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="graph" style="height: 300px">
+                    
+                </div>
+                <div id="graph2" style="height: 300px">
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-3">
+     
+      
+       <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class=" panel-heading ">
+                <h4>Controles</h4></div>
+            <div class="panel-body center">
+                
+                   <form class="navbar-form navbar-left " role="search">
+                    
+                        <input type="number" class="form-control text-center" placeholder="# de nodos" ng-model="this.numeroNodos" min=0>
+                        <br><br>
+                    
+                    
+                    <button ng-click="this.agregarNodo()" class="btn btn-default">Agregar</button>
+                    <br><br>
+                    <div class="form-group">
+                        <div class="dropdown">                                                      
+
+                                <select ng-model="this.inicio">
+                                    Nodo Origen
+                                        <option 
+                                           ng-repeat="node in this.getNodes()"                                           
+                                           ng-selected="{{node.label == this.inicio}}"
+                                           value="{{node.label}}">{{node.label}}
+                                       </option>
+                                </select>                            
+                        </div>
+                        <br>
+                        <input type="number" class="form-control text-center" placeholder="Peso" ng-model="this.peso" min=1>
+                        <br><br>
+                        <div class="dropdown">                            
+
+                            <select ng-model="this.final" >
+                                Nodo Destino
+                                        <option 
+                                           ng-repeat="node in this.getNodes()"                                           
+                                           ng-selected="{{node.label == this.final}}"
+                                           value="{{node.label}}">{{node.label}}
+                                       </option>
+                                </select>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-default" ng-click="this.agregarArco()">Generar</button>
+                        <br><br>
+                        <input type="text" class="form-control text-center" placeholder="Eliminar nodo:" ng-model="this.nodo">
+                        <br><br>
+                                        
+                        <button ng-click="this.eliminarNodo()" class="btn btn-default">Eliminar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+</div>
