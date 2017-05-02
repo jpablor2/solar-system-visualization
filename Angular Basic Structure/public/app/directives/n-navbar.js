@@ -2,15 +2,15 @@
     var app = angular.module('n-navbar', ['algoritmos']);
 
     app.controller('StoreController', function ($scope, DriverService) {
-        $scope.title = 'Base Controller';
+        $scope.title = 'Titulo Dashboard 0';
         $scope.message = 'Everyone come and see how good I look!';
 
     });
 
 
     app.controller('ManualController', function ($scope, DriverService) {
-        $scope.title = 'Generación Manual';
-        $scope.message = 'Indicaciones: construya su propio grafo utilizando el menú de controles (derecha)';
+        $scope.title = 'Titulo Dashboard 1';
+        $scope.message = 'Indicaciones';
         $scope.numeroGrafos = 0;
         $scope.busqueda = 0;
         $scope.numeroNodos = 1;
@@ -45,8 +45,8 @@
     });
 
     app.controller('AutomaticController', function ($scope, DriverService) {
-        $scope.title = 'Generación Automatica ';
-        $scope.message = 'Indicaciones: construya automaticamente su grafo digitando la cantidad de nodos que desea y dando click en el boton de generar en el  menú de controles (derecha)';
+        $scope.title = 'Titulo Dashboard 2 ';
+        $scope.message = 'Indicaciones: ';
         $scope.busqueda = 0;
         $scope.numeroGrafos = 0;
         $scope.nodo;
@@ -75,8 +75,8 @@
     });
 
     app.controller('LoadController', function ($scope) {
-        $scope.title = 'Load Controller';
-        $scope.message = 'A continuación seleccione el archivo y presione el boton de cargar grafo';
+        $scope.title = 'Titulo Dashboard 3';
+        $scope.message = 'Indicaciones';
         $scope.busqueda = 0;
 
 
@@ -135,8 +135,8 @@
                         var steps = [
 
                             {
-                                title: 'Seleccione el nodo',
-                                text: 'Origen'
+                                title: 'Seleccione',
+                                text: 'Opc-1'
                   }
                 ]
 
@@ -153,8 +153,8 @@
                             })
                             var steps = [
                                 {
-                                    title: 'Seleccione el nodo',
-                                    text: 'Destino'
+                                    title: 'Seleccione ',
+                                    text: 'Opc-2'
                   }
                 ]
                             swal.queue(steps).then(function (result2) {
@@ -162,8 +162,8 @@
                                 var origen = DriverService.nodosSwal[eval(parseInt(result1))];
                                 var destino = DriverService.nodosSwal[eval(parseInt(result2))];
                                 swal({
-                                    title: "Buscando ruta",
-                                    text: "Calculando su ruta",
+                                    title: "Resolviendo",
+                                    text: "Espere por favor",
                                     type: 'success',
                                     animation: true,
                                     timer: 3000,

@@ -13,9 +13,9 @@
 
         <div class="panel panel-default">
             <div class=" panel-heading ">
-                <h4>Información del grafo </h4></div>
+                <h4>Panel de informacion </h4></div>
             <div class="panel-body">
-                <h5> Número de Nodos en el Gráfos <span class="label label-info">{{numeroGrafos}}</span></h5>
+                <h5> Info <span class="label label-info">{{numeroGrafos}}</span></h5>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                 <div class=" panel-heading ">
                     <h4>Controles</h4></div>
                 <div class="panel-body center">
-                    <form class="navbar-form navbar-left " role="search" ng-submit="this.generarGrafo()">
+                    <form class="navbar-form navbar-left " role="search" ng-submit="">
 
 
 
@@ -62,10 +62,10 @@
                     </form>
                     <form class="navbar-form navbar-left " role="search">
 
-                        <input type="text" class="form-control text-center" placeholder="Eliminar nodo:" ng-model="this.nodo">
+                        <input type="text" class="form-control text-center" placeholder="Eliminar:" ng-model="this.nodo">
                         <br><br>
                                         
-                        <button ng-click="this.eliminarNodo()" class="btn btn-default">Eliminar</button>
+                        <button ng-click="" class="btn btn-default">Eliminar</button>
 
                     </form>
                 </div>
