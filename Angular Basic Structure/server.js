@@ -34,6 +34,11 @@ app.get('/server/read', serverMethods.readJSON);
 app.get('/server/getjson', serverMethods.getJSON);
 app.get('/server/getschema', serverMethods.getSchema);
 
+
+app.get('/server/getModulos', serverMethods.getModulos);
+app.get('/server/getInversores', serverMethods.getInversores);
+app.get('/server/getArreglos', serverMethods.getArreglos);
+
 app.listen(3000, function() {
     console.log("Node server running on http://localhost:3000");
   });

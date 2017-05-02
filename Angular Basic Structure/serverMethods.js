@@ -73,3 +73,40 @@ exports.getSchema = function (req, res) {
     };
     res.send(200,json);
 }
+
+exports.getModulos = function (req, res) {
+    var json={
+        "id_modulo":"a",
+        "id_inversor":"a",
+        "id_arreglo":"a",
+        "p_stc":"a",
+        "p_noct":"a",
+        "eficiencia":"a",
+        "fact_desemp":"a",
+        "modelo":"a",
+        "descripcion":"a"
+    };
+    res.send(200,json);
+}
+
+exports.getInversores = function (req, res) {
+    var json={
+        "id_inversor":"a",
+        "max_strings":"a",
+        "modelo":"a",
+        "descripcion":"a",
+        "micro":"a"
+    };
+    res.send(200,json);
+}
+
+exports.getArreglos = function (req, res) {
+    var json={
+        "id_arreglo":"a",
+        "tipoConexion":"a",
+        "nPaneles":"a",
+        "anguloInclinacion":"a",
+        "anguloOrientacion":"a"
+    };
+    res.send(200,json);
+}
