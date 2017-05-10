@@ -1,0 +1,13 @@
+http://mherman.org/blog/2015/02/12/postgresql-and-nodejs/#.WQrLSOU19PY
+
+https://scotch.io/tutorials/getting-started-with-node-express-and-postgres-using-sequelize
+
+https://mittaus.wordpress.com/2011/04/02/stored-function/
+
+Links de es6 para comandos de javascript
+
+https://scotch.io/tutorials/better-node-with-es6-pt-i
+
+https://scotch.io/tutorials/better-javascript-with-es6-pt-ii-a-deep-dive-into-classes
+
+https://scotch.io/tutorials/better-javascript-with-es6-pt-iii-cool-collections-slicker-strings
