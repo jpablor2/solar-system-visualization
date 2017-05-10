@@ -10,10 +10,6 @@ import android.os.Parcelable;
 
 public class Modulo implements Parcelable{
 
-    public static final String TIPO_SERIAL = "S";
-    public static final String TIPO_PARALELO = "P";
-    public static final String TIPO_MIXTO = "M";
-
     private String identificacion;
     private String id_inversor;
     private String id_arreglo;

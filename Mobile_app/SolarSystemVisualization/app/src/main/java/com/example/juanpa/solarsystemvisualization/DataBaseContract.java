@@ -120,7 +120,7 @@ public class DataBaseContract {
 
                     DataBaseEntry.COLUMN_NAME_DESCRIPCION_INVERSOR + TEXT_TYPE + COMMA_SEP +
 
-                    DataBaseEntry.COLUMN_NAME_MICRO_INVERSOR + BOOL_TYPE + COMMA_SEP +
+                    DataBaseEntry.COLUMN_NAME_MICRO_INVERSOR + BOOL_TYPE +
 
                     ")";
 
@@ -141,7 +141,7 @@ public class DataBaseContract {
 
                     DataBaseEntry.COLUMN_NAME_ANGULO_INCLIN + DOUBLE_TYPE + COMMA_SEP +
 
-                    DataBaseEntry.COLUMN_NAME_ANGULO_ORIEN + DOUBLE_TYPE + COMMA_SEP +
+                    DataBaseEntry.COLUMN_NAME_ANGULO_ORIEN + DOUBLE_TYPE +
 
                     ")";
 

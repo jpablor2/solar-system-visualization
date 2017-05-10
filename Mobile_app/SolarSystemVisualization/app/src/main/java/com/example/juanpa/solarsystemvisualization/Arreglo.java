@@ -7,8 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Arreglo implements Parcelable{
+
+    public static final char TIPO_SERIAL = 'S';
+    public static final char TIPO_PARALELO = 'P';
+    public static final char TIPO_MIXTO = 'M';
 
     private String identificacion;
     private char tipo_conexion;
@@ -103,11 +108,11 @@ public class Arreglo implements Parcelable{
 
     //Inserta un arreglo a la base de datos
     public long insertar(Context context) {
-
+        Log.d("FLAG","Entró en insertar");
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
-
+        Log.d("FLAG","Creó helper");
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-
+        Log.d("FLAG","Obtuvo DB");
         ContentValues values = new ContentValues();
         values.put(DataBaseContract.DataBaseEntry._ID, getIdentificacion());
         values.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_TIPO_CONEXION, String.valueOf(getTipo_conexion()));
@@ -115,7 +120,9 @@ public class Arreglo implements Parcelable{
         values.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_ANGULO_INCLIN, getAngulo_inclinacion());
         values.put(DataBaseContract.DataBaseEntry.COLUMN_NAME_ANGULO_ORIEN, getAngulo_orientacion());
 
+        Log.d("FLAG","Insertó en BD");
         return db.insert(DataBaseContract.DataBaseEntry.TABLE_NAME_ARREGLO, null, values);
+
     }
 
     // Lee un arreglo desde la base de datos

@@ -155,7 +155,7 @@ public class Inversor implements Parcelable{
             setMax_strings(cursor.getInt(cursor.getColumnIndexOrThrow(
                     DataBaseContract.DataBaseEntry.COLUMN_NAME_MAX_STRINGS)));
             setMicro(cursor.getInt(cursor.getColumnIndexOrThrow(
-                    DataBaseContract.DataBaseEntry.COLUMN_NAME_FACT_DESEMP)) > 0);
+                    DataBaseContract.DataBaseEntry.COLUMN_NAME_MICRO_INVERSOR)) > 0);
             setModelo(cursor.getString(cursor.getColumnIndexOrThrow(
                     DataBaseContract.DataBaseEntry.COLUMN_NAME_MODELO_MODULO)));
             setDescripcion(cursor.getString(cursor.getColumnIndexOrThrow(
