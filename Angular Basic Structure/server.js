@@ -39,6 +39,8 @@ app.get('/server/getModulos', serverMethods.getModulos);
 app.get('/server/getInversores', serverMethods.getInversores);
 app.get('/server/getArreglos', serverMethods.getArreglos);
 
+app.get('/server/getUsers', serverMethods.getUsers);
+
 app.listen(3000, function() {
     console.log("Node server running on http://localhost:3000");
   });

@@ -9,5 +9,4 @@
     <item android:id="@+id/nav_logout"
         android:icon="@mipmap/ic_arrow_back_black_24dp"
         android:title="Log out"></item>
-
 </menu>

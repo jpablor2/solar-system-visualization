@@ -2,7 +2,12 @@ var jsonfile = require('jsonfile');
 var express = require("express");
 
 
-
+exports.getUsers = function (req, res) {
+    var json={
+        "id": 1
+    };
+    res.send(200,json);
+}
 
 
 exports.readJSON = function (req, res) {
@@ -86,7 +91,7 @@ exports.getModulos = function (req, res) {
         "modelo":"a",
         "descripcion":"a"
     };
-    res.send(200,json);
+    res.send(202,json);
 }
 
 exports.getInversores = function (req, res) {
@@ -107,6 +112,8 @@ exports.getArreglos = function (req, res) {
         "nPaneles":"a",
         "anguloInclinacion":"a",
         "anguloOrientacion":"a"
+        
     };
+    
     res.send(200,json);
 }
