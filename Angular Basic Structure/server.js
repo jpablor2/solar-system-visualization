@@ -29,17 +29,20 @@ router.get('/', function(req, res) {
 
 //app.use(router);
 
-app.get('/server/export', serverMethods.exportJSON);
-app.get('/server/read', serverMethods.readJSON);
-app.get('/server/getjson', serverMethods.getJSON);
-app.get('/server/getschema', serverMethods.getSchema);
-
-
+//Modulos
 app.get('/server/getModulos', serverMethods.getModulos);
-app.get('/server/getInversores', serverMethods.getInversores);
-app.get('/server/getArreglos', serverMethods.getArreglos);
+app.post('/server/getModulo', serverMethods.getModulo);
 
-app.get('/server/getUsers', serverMethods.getUsers);
+//Inversores
+app.get('/server/getInversores', serverMethods.getInversores);
+app.post('/server/getInversor', serverMethods.getInversor);
+
+//Arreglos
+app.get('/server/getArreglos', serverMethods.getArreglos);
+app.post('/server/getArreglo', serverMethods.getArreglo);
+
+
+
 
 app.listen(3000, function() {
     console.log("Node server running on http://localhost:3000");
