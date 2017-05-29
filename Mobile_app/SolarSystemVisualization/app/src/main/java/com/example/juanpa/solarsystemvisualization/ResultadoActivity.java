@@ -21,7 +21,7 @@ public class ResultadoActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, UnityPlayerActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("Left","Left Text");
+        bundle.putString("Left","Texto de la izquierda"+System.getProperty("line.separator")+"Otra cosa");
         bundle.putString("Right","Right Text");
         intent.putExtras(bundle);
         startActivity(intent);
