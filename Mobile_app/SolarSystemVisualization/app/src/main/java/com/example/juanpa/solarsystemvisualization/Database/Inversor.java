@@ -1,4 +1,4 @@
-package com.example.juanpa.solarsystemvisualization;
+package com.example.juanpa.solarsystemvisualization.Database;
 
 
 import android.content.ContentValues;

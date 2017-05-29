@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.juanpa.solarsystemvisualization.Database.Arreglo;
+import com.example.juanpa.solarsystemvisualization.Database.Inversor;
+import com.example.juanpa.solarsystemvisualization.Database.Modulo;
+
 public class InfoActivity extends AppCompatActivity {
 
     @Override
