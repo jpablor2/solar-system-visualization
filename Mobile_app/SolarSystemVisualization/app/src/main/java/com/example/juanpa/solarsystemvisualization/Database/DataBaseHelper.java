@@ -1,9 +1,11 @@
-package com.example.juanpa.solarsystemvisualization;
+package com.example.juanpa.solarsystemvisualization.Database;
 
 import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.juanpa.solarsystemvisualization.Database.DataBaseContract;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper {
