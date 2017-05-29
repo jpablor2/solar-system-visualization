@@ -11,7 +11,10 @@ import com.example.juanpa.solarsystemvisualization.Models.ModulesResponse;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -30,6 +33,15 @@ public interface MyApiEndpointInterface {
 
     @GET("getInversores")
     Call<Inverters> getInversores();
+
+    @POST("getArreglo")
+    Call<Arrays> getArreglo(@Query("id_arreglo") String id_arreglo);
+
+    @POST("getModulo")
+    Call<Modules> getModulo(@Query("id_modulo") String id);
+
+    @POST("getInversor")
+    Call<Inverters> getInversor(@Query("id_inversor") String id);
 
 
 }

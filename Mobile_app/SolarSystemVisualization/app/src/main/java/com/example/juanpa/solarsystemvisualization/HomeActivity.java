@@ -130,23 +130,20 @@ public class HomeActivity extends AppCompatActivity {
 
                 APIClient APIClient = new APIClient();
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.1.145:3000/server/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                MyApiEndpointInterface apiService = retrofit.create(MyApiEndpointInterface.class);
-                    Call<Inverters> call = apiService.getInversores();
-                call.enqueue(new Callback<Inverters>() {
+                MyApiEndpointInterface apiService = APIClient.getClient().create(MyApiEndpointInterface.class);
+                String id_arreglo=contents;
+                Toast.makeText(this,"Request: "+id_arreglo, Toast.LENGTH_LONG).show();
+                Call<Arrays> call = apiService.getArreglo(id_arreglo);
+                call.enqueue(new Callback<Arrays>() {
                     @Override
-                    public void onResponse(Call<Inverters> call, Response<Inverters> response) {
+                    public void onResponse(Call<Arrays> call, Response<Arrays> response) {
 
                         response.body();
                         /*String statusCode = String.valueOf(response.code());
                         List<Arrays> arreglos= (List<Arrays>) response.body();*/
                         if(response.body()!=null) {
-                            String descripcion = response.body().getIdInversor();
-                            Toast.makeText(getApplicationContext(), descripcion, Toast.LENGTH_LONG).show();
+                            String descripcion = response.body().getTipoConexion();
+                            Toast.makeText(getApplicationContext(),"Response: "+ descripcion, Toast.LENGTH_LONG).show();
                         }
 
                         else{
@@ -161,8 +158,8 @@ public class HomeActivity extends AppCompatActivity {
                 });
                 //call
 
-                /*Intent login_intent = new Intent(this, ResultadoActivity.class);
-                startActivity(login_intent);*/
+                Intent login_intent = new Intent(this, ResultadoActivity.class);
+                startActivity(login_intent);
             }
         }
     }

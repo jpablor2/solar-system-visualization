@@ -8,67 +8,76 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Arrays {
-    @SerializedName("id_inversor")
+    @SerializedName("id_arreglo")
     @Expose
-    private String id_inversor;
-    @SerializedName("max_strings")
+    private String idArreglo;
+    @SerializedName("tipoConexion")
     @Expose
-    private String max_strings;
-    @SerializedName("modelo")
+    private String tipoConexion;
+    @SerializedName("nPaneles")
     @Expose
-    private String modelo;
-    @SerializedName("descripcion")
+    private String nPaneles;
+    @SerializedName("anguloInclinacion")
     @Expose
-    private String descripcion;
-    @SerializedName("micro")
+    private String anguloInclinacion;
+    @SerializedName("anguloOrientacion")
     @Expose
-    private String micro;
+    private String anguloOrientacion;
 
-    public Arrays(String idInversor, String maxStrings, String modelo, String descripcion, String micro) {
-        this.id_inversor = idInversor;
-        this.max_strings = maxStrings;
-        this.modelo = modelo;
-        this.descripcion = descripcion;
-        this.micro = micro;
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Arrays() {
     }
 
-    public String getId_inversor() {
-        return id_inversor;
+
+    public Arrays(String idArreglo, String tipoConexion, String nPaneles, String anguloInclinacion, String anguloOrientacion) {
+        super();
+        this.idArreglo = idArreglo;
+        this.tipoConexion = tipoConexion;
+        this.nPaneles = nPaneles;
+        this.anguloInclinacion = anguloInclinacion;
+        this.anguloOrientacion = anguloOrientacion;
     }
 
-    public void setId_inversor(String id_inversor) {
-        this.id_inversor = id_inversor;
+    public String getIdArreglo() {
+        return idArreglo;
     }
 
-    public String getMax_strings() {
-        return max_strings;
+    public void setIdArreglo(String idArreglo) {
+        this.idArreglo = idArreglo;
     }
 
-    public void setMax_strings(String max_strings) {
-        this.max_strings = max_strings;
+    public String getTipoConexion() {
+        return tipoConexion;
     }
 
-    public String getModelo() {
-        return modelo;
+    public void setTipoConexion(String tipoConexion) {
+        this.tipoConexion = tipoConexion;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public String getNPaneles() {
+        return nPaneles;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setNPaneles(String nPaneles) {
+        this.nPaneles = nPaneles;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public String getAnguloInclinacion() {
+        return anguloInclinacion;
     }
 
-    public String getMicro() {
-        return micro;
+    public void setAnguloInclinacion(String anguloInclinacion) {
+        this.anguloInclinacion = anguloInclinacion;
     }
 
-    public void setMicro(String micro) {
-        this.micro = micro;
+    public String getAnguloOrientacion() {
+        return anguloOrientacion;
+    }
+
+    public void setAnguloOrientacion(String anguloOrientacion) {
+        this.anguloOrientacion = anguloOrientacion;
     }
 }
