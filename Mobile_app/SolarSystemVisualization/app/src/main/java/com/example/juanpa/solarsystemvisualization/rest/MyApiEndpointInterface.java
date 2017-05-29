@@ -20,6 +20,8 @@ import retrofit2.http.Query;
 
 public interface MyApiEndpointInterface {
 
+
+
     @GET("getArreglos")
     Call<Arrays> getArreglos();
 
