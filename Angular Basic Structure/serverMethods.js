@@ -144,7 +144,7 @@ exports.getArreglos = function (req, res) {
 exports.getArreglo = function (req, res) {
 
         var resource = req.body;
-        console.log("llamando desde la app tipo de dato "+typeof(req.body._id));
+        console.log(req.body);
         db.collection('arreglo').findOne({
             _id: parseInt(req.body._id)
         }, function (err, resource) {
