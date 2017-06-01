@@ -35,13 +35,13 @@ public interface MyApiEndpointInterface {
     Call<Inverters> getInversores();
 
     @POST("getArreglo")
-    Call<Arrays> getArreglo(@Query("_id") String id_arreglo);
+    Call<Arrays> getArreglo(@Query("_id") String _id);
 
     @POST("getModulo")
-    Call<Modules> getModulo(@Query("_id") String id);
+    Call<Modules> getModulo(@Query("_id") String _id);
 
     @POST("getInversor")
-    Call<Inverters> getInversor(@Query("_id") String id);
+    Call<Inverters> getInversor(@Query("_id") String _id);
 
 
 }
