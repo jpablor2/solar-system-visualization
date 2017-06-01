@@ -1,19 +1,19 @@
-<form>
+<form ng-controller="LoadController as inverter" ng-submit="inverter.addInverter()">
     <div class="form-group">
         <label for="max_strings">Máximo de paneles: </label>
-        <input type="text" class="form-control" id="max_strings" name="max_strings">
+        <input type="text" class="form-control" id="max_strings" name="max_strings" ng-model="inverter.vm.fecha">
     </div>
     <div class="form-group">
         <label for="modelo">Modelo: </label>
-        <input type="text" class="form-control" id="modelo" name="modelo">
+        <input type="text" class="form-control" id="modelo" name="modelo" ng-model="inverter.vm.fecha">
     </div>
     <div class="form-group">
         <label for="descripcion">Descripción: </label>
-        <input type="text" class="form-control" id="descripcion" name="descripcion">
+        <input type="text" class="form-control" id="descripcion" name="descripcion" ng-model="inverter.vm.fecha">
     </div>
     <div class="form-check">
         <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="micro" name="micro">
+            <input type="checkbox" class="form-check-input" id="micro" name="micro" ng-model="inverter.vm.fecha">
             Microinversor
         </label>
     </div>
