@@ -11,9 +11,9 @@ public class Arrays {
     @SerializedName("_id")
     @Expose
     private String _id;
-    @SerializedName("tipoConexion")
+    @SerializedName("tipo_conexion")
     @Expose
-    private String tipoConexion;
+    private String tipo_conexion;
     @SerializedName("nPaneles")
     @Expose
     private String nPaneles;
@@ -35,7 +35,7 @@ public class Arrays {
     public Arrays(String idArreglo, String tipoConexion, String nPaneles, String anguloInclinacion, String anguloOrientacion) {
         super();
         this._id = idArreglo;
-        this.tipoConexion = tipoConexion;
+        this.tipo_conexion = tipoConexion;
         this.nPaneles = nPaneles;
         this.anguloInclinacion = anguloInclinacion;
         this.anguloOrientacion = anguloOrientacion;
@@ -50,11 +50,11 @@ public class Arrays {
     }
 
     public String getTipoConexion() {
-        return tipoConexion;
+        return tipo_conexion;
     }
 
     public void setTipoConexion(String tipoConexion) {
-        this.tipoConexion = tipoConexion;
+        this.tipo_conexion = tipoConexion;
     }
 
     public String getNPaneles() {

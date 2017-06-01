@@ -43,6 +43,7 @@ app.post('/server/getInversor', serverMethods.getInversor);
 app.post('/server/insertArreglo', serverMethods.insertArreglo);
 app.get('/server/getArreglos', serverMethods.getArreglos);
 app.post('/server/getArreglo', serverMethods.getArreglo);
+app.post('/server/getConjunto', serverMethods.getConjunto);
 
 
 
