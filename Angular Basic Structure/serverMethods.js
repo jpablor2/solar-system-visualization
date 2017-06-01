@@ -37,7 +37,6 @@ exports.insertModulo = function (req, res) {
         }
     }, function (req2, res2) {
         var newId = res2.value.modulo;
-        console.log("el _id que esta llegando a modulo   es "+newId);
         resource['_id'] = newId;
         db.collection('modulo').insert(resource, function (err, doc_res) {
             if (err) throw err;
@@ -57,7 +56,7 @@ exports.getModulos = function (req, res) {
 exports.getModulo = function (req, res) {
     var resource = req.body;
     db.collection('modulo').findOne({
-        _id: req.body._id
+        _id: parseInt(req.body._id)
     }, function (err, resource) {
 
         if (err) throw err;
@@ -81,7 +80,6 @@ exports.insertInversor = function (req, res) {
         var newId = res2.value.inversor;
 
         resource['_id'] = newId;
-        console.log("nuevo id de inversor es "+newId);
         db.collection('inversor').insert(resource, function (err, doc_res) {
             if (err) throw err;
             res.send(200, resource);
@@ -99,8 +97,9 @@ exports.getInversores = function (req, res) {
 }
 exports.getInversor = function (req, res) {
     var resource = req.body;
+    console.log("id inversor "+typeof(parseInt(req.body._id)));
     db.collection('inversor').findOne({
-        _id: req.body._id
+        _id: parseInt(req.body._id)
     }, function (err, resource) {
 
         if (err) throw err;
@@ -123,8 +122,7 @@ exports.insertArreglo = function (req, res) {
         var newId = res2.value.arreglo;
 
         resource['_id'] = newId;
-        console.log("nuevo id de arreglo "+newId);
-        
+                
         db.collection('arreglo').insert(resource, function (err, doc_res) {
             if (err) throw err;
             res.send(200, resource);
@@ -146,9 +144,9 @@ exports.getArreglos = function (req, res) {
 exports.getArreglo = function (req, res) {
 
         var resource = req.body;
-        
+        console.log("llamando desde la app tipo de dato "+typeof(req.body._id));
         db.collection('arreglo').findOne({
-            _id: req.body._id
+            _id: parseInt(req.body._id)
         }, function (err, resource) {
 
             if (err) throw err;
