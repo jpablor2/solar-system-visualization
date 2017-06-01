@@ -30,14 +30,17 @@ router.get('/', function(req, res) {
 //app.use(router);
 
 //Modulos
+app.post('/server/insertModulo', serverMethods.insertModulo);
 app.get('/server/getModulos', serverMethods.getModulos);
 app.post('/server/getModulo', serverMethods.getModulo);
 
 //Inversores
+app.post('/server/insertInversor', serverMethods.insertInversor);
 app.get('/server/getInversores', serverMethods.getInversores);
 app.post('/server/getInversor', serverMethods.getInversor);
 
 //Arreglos
+app.post('/server/insertArreglo', serverMethods.insertArreglo);
 app.get('/server/getArreglos', serverMethods.getArreglos);
 app.post('/server/getArreglo', serverMethods.getArreglo);
 
