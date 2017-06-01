@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Modules {
 
-    @SerializedName("id_modulo")
+    @SerializedName("_id")
     @Expose
-    private String idModulo;
+    private String _id;
     @SerializedName("id_inversor")
     @Expose
     private String idInversor;
@@ -37,7 +37,7 @@ public class Modules {
     private String descripcion;
 
     public Modules(String idModulo, String idInversor, String idArreglo, String pStc, String pNoct, String eficiencia, String factDesemp, String modelo, String descripcion) {
-        this.idModulo = idModulo;
+        this._id = idModulo;
         this.idInversor = idInversor;
         this.idArreglo = idArreglo;
         this.pStc = pStc;
@@ -49,11 +49,11 @@ public class Modules {
     }
 
     public String getIdModulo() {
-        return idModulo;
+        return _id;
     }
 
     public void setIdModulo(String idModulo) {
-        this.idModulo = idModulo;
+        this._id = idModulo;
     }
 
     public String getIdInversor() {
