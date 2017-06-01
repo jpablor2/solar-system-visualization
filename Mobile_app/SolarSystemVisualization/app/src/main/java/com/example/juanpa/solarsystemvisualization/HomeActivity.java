@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity {
                         /*String statusCode = String.valueOf(response.code());
                         List<Arrays> arreglos= (List<Arrays>) response.body();*/
                         if(response.body()!=null) {
-                            String descripcion = response.body().getTipoConexion();
+                            String descripcion = response.body().getAnguloOrientacion();
                             Toast.makeText(getApplicationContext(),"Response: "+ descripcion, Toast.LENGTH_LONG).show();
                         }
 
