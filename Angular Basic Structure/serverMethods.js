@@ -27,7 +27,7 @@ db.open(function (err, db) {
 //------------MODULOS
 
 exports.insertModulo = function (req, res) {
-    
+
     var resource = req.body;
     db.collection('index').findAndModify({
         _id: 0
@@ -43,7 +43,7 @@ exports.insertModulo = function (req, res) {
             res.send(200, resource);
         });
     });
-    
+
 }
 
 exports.getModulos = function (req, res) {
@@ -54,9 +54,9 @@ exports.getModulos = function (req, res) {
     });
 }
 exports.getModulo = function (req, res) {
-    var resource = req.body;
+    var resource = req.query;
     db.collection('modulo').findOne({
-        _id: parseInt(req.body._id)
+        _id: parseInt(req.query._id)
     }, function (err, resource) {
 
         if (err) throw err;
@@ -68,7 +68,7 @@ exports.getModulo = function (req, res) {
 //------------INVERSORES
 
 exports.insertInversor = function (req, res) {
-    
+
     var resource = req.body;
     db.collection('index').findAndModify({
         _id: 0
@@ -85,7 +85,7 @@ exports.insertInversor = function (req, res) {
             res.send(200, resource);
         });
     });
-    
+
 }
 
 exports.getInversores = function (req, res) {
@@ -96,10 +96,10 @@ exports.getInversores = function (req, res) {
     });
 }
 exports.getInversor = function (req, res) {
-    var resource = req.body;
-    console.log("id inversor "+typeof(parseInt(req.body._id)));
+    var resource = req.query;
+    console.log("id inversor " + typeof (parseInt(req.query._id)));
     db.collection('inversor').findOne({
-        _id: parseInt(req.body._id)
+        _id: parseInt(req.query._id)
     }, function (err, resource) {
 
         if (err) throw err;
@@ -110,7 +110,7 @@ exports.getInversor = function (req, res) {
 
 //------------ARREGLOS
 exports.insertArreglo = function (req, res) {
-    
+
     var resource = req.body;
     db.collection('index').findAndModify({
         _id: 0
@@ -122,13 +122,13 @@ exports.insertArreglo = function (req, res) {
         var newId = res2.value.arreglo;
 
         resource['_id'] = newId;
-                
+
         db.collection('arreglo').insert(resource, function (err, doc_res) {
             if (err) throw err;
             res.send(200, resource);
         });
     });
-    
+
 }
 
 
@@ -143,17 +143,46 @@ exports.getArreglos = function (req, res) {
 }
 exports.getArreglo = function (req, res) {
 
+    var resource = req.query;
+    console.log(req.query);
+    db.collection('arreglo').findOne({
+        _id: parseInt(req.query._id)
+    }, function (err, resource) {
+
+        if (err) throw err;
+        res.send(200, resource);
+    });
+
+}
+/*
+exports.getConjunto = function (req, res) {
+
+    console.log("buscando conjunto..");
+    
         var resource = req.body;
-        console.log(req.body);
+    
         db.collection('arreglo').findOne({
             _id: parseInt(req.body._id)
         }, function (err, resource) {
-
+            console.log("buscando relaciones del arreglo "+req.body._id);
             if (err) throw err;
             res.send(200, resource);
         });
 
-    }
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*const pg = require("pg");
     const connectionString = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/SSV';
     const client = new pg.Client(connectionString);
