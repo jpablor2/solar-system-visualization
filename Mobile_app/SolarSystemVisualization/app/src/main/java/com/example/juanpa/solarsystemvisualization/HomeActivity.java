@@ -120,6 +120,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 //get the extras that are returned from the intent
@@ -142,8 +143,21 @@ public class HomeActivity extends AppCompatActivity {
                         /*String statusCode = String.valueOf(response.code());
                         List<Arrays> arreglos= (List<Arrays>) response.body();*/
                         if(response.body()!=null) {
-                            String descripcion = response.body().getAnguloOrientacion();
-                            Toast.makeText(getApplicationContext(),"Response: "+ descripcion, Toast.LENGTH_LONG).show();
+                            Bundle bundle = new Bundle();
+
+                            String tipo = response.body().getTipoConexion();
+                            String nPaneles = response.body().getNPaneles();
+                            String orientacion = response.body().getAnguloOrientacion();
+                            String inclinacion = response.body().getAnguloInclinacion();
+                            bundle.putString("tipo","Tipo: "+ tipo +"\n");
+                            bundle.putString("nPaneles","N. Paneles: "+nPaneles+"\n");
+                            bundle.putString("orientacion","Orientación: "+orientacion+"\n");
+                            bundle.putString("inclinacion","Inclinación: "+inclinacion+"\n");
+                            //Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
+
+                            Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
+                            login_intent.putExtras(bundle);
+                            startActivity(login_intent);
                         }
 
                         else{
@@ -158,8 +172,6 @@ public class HomeActivity extends AppCompatActivity {
                 });
                 //call
 
-                Intent login_intent = new Intent(this, ResultadoActivity.class);
-                startActivity(login_intent);
             }
         }
     }

@@ -20,10 +20,14 @@ public class ResultadoActivity extends AppCompatActivity {
         //startActivity(login_intent);
 
         Intent intent = new Intent(this, UnityPlayerActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("Left","Texto de la izquierda"+System.getProperty("line.separator")+"Otra cosa");
-        bundle.putString("Right","Texto de la derecha");
-        intent.putExtras(bundle);
+        Bundle data = getIntent().getExtras();
+        Bundle bundle_unity = new Bundle();
+        bundle_unity.putString("Left","Modelo:");
+        bundle_unity.putString("Right","Arreglo:\n"+data.getString("tipo")+
+                data.getString("nPaneles")+
+                data.getString("orientacion")+
+                data.getString("inclinacion"));
+        intent.putExtras(bundle_unity);
         startActivity(intent);
     }
 }
