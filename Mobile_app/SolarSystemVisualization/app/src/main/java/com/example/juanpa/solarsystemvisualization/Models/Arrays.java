@@ -8,9 +8,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Arrays {
-    @SerializedName("id_arreglo")
+    @SerializedName("_id")
     @Expose
-    private String idArreglo;
+    private String _id;
     @SerializedName("tipoConexion")
     @Expose
     private String tipoConexion;
@@ -34,7 +34,7 @@ public class Arrays {
 
     public Arrays(String idArreglo, String tipoConexion, String nPaneles, String anguloInclinacion, String anguloOrientacion) {
         super();
-        this.idArreglo = idArreglo;
+        this._id = idArreglo;
         this.tipoConexion = tipoConexion;
         this.nPaneles = nPaneles;
         this.anguloInclinacion = anguloInclinacion;
@@ -42,11 +42,11 @@ public class Arrays {
     }
 
     public String getIdArreglo() {
-        return idArreglo;
+        return _id;
     }
 
     public void setIdArreglo(String idArreglo) {
-        this.idArreglo = idArreglo;
+        this._id = idArreglo;
     }
 
     public String getTipoConexion() {

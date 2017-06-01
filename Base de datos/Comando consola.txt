@@ -1,1 +1,3 @@
 psql -U postgres template1
+
+psql -h username -U contraseña

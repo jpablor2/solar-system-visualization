@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Inverters {
 
-    @SerializedName("id_inversor")
+    @SerializedName("_id")
     @Expose
-    private String idInversor;
+    private String _id;
     @SerializedName("max_strings")
     @Expose
     private String maxStrings;
@@ -26,7 +26,7 @@ public class Inverters {
     private String micro;
 
     public Inverters(String idInversor, String maxStrings, String modelo, String descripcion, String micro) {
-        this.idInversor = idInversor;
+        this._id = idInversor;
         this.maxStrings = maxStrings;
         this.modelo = modelo;
         this.descripcion = descripcion;
@@ -34,11 +34,11 @@ public class Inverters {
     }
 
     public String getIdInversor() {
-        return idInversor;
+        return _id;
     }
 
     public void setIdInversor(String idInversor) {
-        this.idInversor = idInversor;
+        this._id = idInversor;
     }
 
     public String getMaxStrings() {
