@@ -10,8 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.gabriel.lab4.MainActivity">
 
+    <ListView android:id="@+id/paises"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@id/paises"
+        android:text="Hello World!"
+        android:id="@+id/mDataText"
+        />
+
 </RelativeLayout>
