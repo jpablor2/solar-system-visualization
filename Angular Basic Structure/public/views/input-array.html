@@ -1,19 +1,19 @@
-<form>
+<form ng-controller="ManualController as array" ng-submit="array.addArray()">
     <div class="form-group">
         <label for="tipo_arreglo">Tipo de arreglo: </label>
-        <input type="text" class="form-control" id="tipo_arreglo" name="tipo_arreglo">
+        <input type="text" class="form-control" id="tipo_arreglo" name="tipo_arreglo" ng-model="array.vm.fecha">
     </div>
     <div class="form-group">
         <label for="nPaneles">Cantidad de paneles asociados: </label>
-        <input type="text" class="form-control" id="nPaneles" name="nPaneles">
+        <input type="text" class="form-control" id="nPaneles" name="nPaneles" ng-model="array.vm.fecha">
     </div>
     <div class="form-group">
         <label for="orientacion">Ángulo de orientación: </label>
-        <input type="text" class="form-control" id="orientacion" name="orientacion">
+        <input type="text" class="form-control" id="orientacion" name="orientacion" ng-model="array.vm.fecha">
     </div>
     <div class="form-group">
         <label for="inclinacion">Ángulo de inclinación: </label>
-        <input type="text" class="form-control" id="inclinacion" name="nPaneles">
+        <input type="text" class="form-control" id="inclinacion" name="nPaneles" ng-model="array.vm.fecha">
     </div>
     <button type="submit" class="btn btn-primary">Agregar</button>
 </form>

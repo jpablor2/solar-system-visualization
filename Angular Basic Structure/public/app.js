@@ -16,15 +16,15 @@
                 controller: 'StoreController'
             }).state('manual', {
                 url:'/manual',
-                templateUrl: '/views/manual-graph.html',
+                templateUrl: '/views/input-array.html',
                 controller: 'ManualController'
             }).state('automatic', {
                 url:'/automatic',
-                templateUrl: '/views/automatic-graph.html',
+                templateUrl: '/views/input-module.html',
                 controller: 'AutomaticController'
             }).state('loaded', {
                 url:'/loaded',
-                templateUrl: '/views/load-graph.html',
+                templateUrl: '/views/input-inverter.html',
                 controller: 'LoadController'
             });
     });

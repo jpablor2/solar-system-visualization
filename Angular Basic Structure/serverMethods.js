@@ -154,26 +154,141 @@ exports.getArreglo = function (req, res) {
     });
 
 }
-/*
+
 exports.getConjunto = function (req, res) {
 
     console.log("buscando conjunto..");
+
     
-        var resource = req.body;
     
+    /*
+    var param = req.body.filtro;
+    //res.send(200,param);
+
+    db.collection('Dispositivos').find({}, {
+        'ID': 1,
+        'description': 1,
+        '_id': 0
+    }).toArray(function (err, doc_resD) {
+
+        if (err) throw err;
+
+        if (!doc_resD) {
+            console.log("No document found");
+
+        } else {
+            //res.send(200, doc_res);
+            db.collection('MetricasAutomoviles').aggregate([
+
+                    {
+                        '$match': {
+                            'year': parseInt(param)
+                        }
+},
+                    {
+                        '$project': {
+                            'year': 1,
+                            'month': 1,
+                            'amount': 1,
+                            'km': 1,
+                            'date': 1,
+                            'ID': 1,
+                            'liters':1
+                        }
+},
+                    {
+                        '$group': {
+                            '_id': {
+                                'month': '$month',
+                                'year': '$year',
+                                'ID': '$ID',
+                                'km': '$km',
+                                'total_litros':'$liters'
+
+                            },
+                            'total_costo': {
+                                '$sum': '$amount'
+                            },
+                            'min_km': {
+                                '$min': '$km'
+                            },
+                            'max_km': {
+                                '$max': '$km'
+                            },
+                            
+
+                        }
+},
+                    {
+                        '$sort': {
+                            '_id.month': 1,
+                            '_id.ID':1,
+                            '_id.km':1
+                        }
+}
+],
+                function (err, doc_res) {
+                    if (err) throw err;
+
+                    if (!doc_res) {
+                        res.send(400);
+
+                    } else {
+                        var l_reporte = [];
+
+                        for (var i = 0; i < doc_res.length; i++) {
+
+                            for (var j = 0; j < doc_resD.length; j++) {
+                                if (doc_res[i]._id.ID == doc_resD[j].ID) {
+
+                                    var reporte = {
+                                        'tipo_reporte': 'mensual',
+                                        '_id': i,
+                                        'month': doc_res[i]._id.month,
+                                        'year': doc_res[i]._id.year,
+                                        'description': doc_resD[j].description,
+                                        'ID': doc_res[i]._id.ID,
+                                        'total_costo': doc_res[i].total_costo,
+                                        'min_km': doc_res[i].min_km,
+                                        'max_km': doc_res[i].max_km,
+                                        'km':doc_res[i]._id.km, // esto se lo agregue nuevo 
+                                        'total_litros':doc_res[i]._id.total_litros
+                                    };
+                                    break;
+                                }
+
+                            }
+
+                            l_reporte.push(reporte);
+                        }
+                        res.send(200, l_reporte);
+
+                    }
+                });
+        }
+    });
+    */
+    
+    
+    
+    
+    var resource = req.body;
+    db.collection('modulo').find().toArray(function (err, doc_res) {
+        if (err) throw err;
+        if (!doc_res) console.log("No document found");
+        res.send(200, doc_res);
         db.collection('arreglo').findOne({
             _id: parseInt(req.body._id)
         }, function (err, resource) {
-            console.log("buscando relaciones del arreglo "+req.body._id);
+            console.log("buscando relaciones del arreglo " + req.body._id);
             if (err) throw err;
             res.send(200, resource);
+
         });
-
-    }*/
-
+    });
 
 
-
+}
 
 
 
@@ -183,11 +298,11 @@ exports.getConjunto = function (req, res) {
 
 
 
-    /*const pg = require("pg");
-    const connectionString = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/SSV';
-    const client = new pg.Client(connectionString);
-    client.connect();
+/*const pg = require("pg");
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5433/SSV';
+const client = new pg.Client(connectionString);
+client.connect();
 
-    const query = client.query(
-      'CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
-    query.on('end', () => { client.end(); });*/
+const query = client.query(
+  'CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
+query.on('end', () => { client.end(); });*/

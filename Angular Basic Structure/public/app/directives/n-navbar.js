@@ -19,26 +19,67 @@
         $scope.final;
         $scope.nodo;
 
+        $scope.addArray = function () {
+            
+            var _id = $scope._id,
+                tipo_conexion=$scope.tipo_conexion,
+                nPaneles=$scope.nPaneles,
+                anguloInclinacion=$scope.anguloInclinacion,
+                anguloOrientacion=$scope.anguloOrientacion;
+
+            //Prueba de recoleccion de datos
+            //console.log("Kilometros: "+km+" Placa: "+placa+" Litros: "+litros+" Monto: "+monto+" Fecha: "+fecha+" Id del conductor: "+id+" Numero de Factura:  "+idFactura);
+
+            var setHeader = function (req) {
+                req.setRequestHeader('content-type', 'application/json');
+                req.setRequestHeader('accept', 'application/json');
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/server/insertArreglo',
+                data: JSON.stringify({
+                    '_id': _id,
+                    'tipo_conexion':tipo_conexion,
+                    'nPaneles':nPaneles,
+                    'anguloInclinacion':anguloInclinacion,
+                    'anguloOrientacion':anguloOrientacion
+                }),
+                beforeSend: setHeader,
+
+                complete: function (data) {
+                    //alert("Datos Ingresados Exitosamente!! ");
+                    //console.log(data.responseText);
+                    
+                    console.log("se inserto correctamente");
+                },
+                error: function (e) {
+                    //alert("Algo salio mal en la insercion!! :(");
+                }
+            })
+        }
+
+
         DriverService.clean();
-        
+
         $scope.getNodes = function () {
             return DriverService.nodes;
         }
         $scope.agregarNodo = function () {
-            
-                for (i = 0; i < $scope.numeroNodos; i++) {
-                    DriverService.insertNode();
-                }
-    
+
+            for (i = 0; i < $scope.numeroNodos; i++) {
+                DriverService.insertNode();
+            }
+
         }
         $scope.agregarArco = function () {
-            if ($scope.peso) {  
+            if ($scope.peso) {
                 DriverService.insertArc($scope.inicio, $scope.final, $scope.peso);
             }
         }
-        
-        $scope.eliminarNodo = function(){
-            if($scope.nodo){
+
+        $scope.eliminarNodo = function () {
+            if ($scope.nodo) {
                 DriverService.eliminarNodo($scope.nodo);
             }
         }
@@ -50,11 +91,17 @@
         $scope.busqueda = 0;
         $scope.numeroGrafos = 0;
         $scope.nodo;
-        
+
         DriverService.clean();
-        
-        $scope.eliminarNodo = function(){
-            if($scope.nodo){
+
+
+        $scope.addModule = function () {
+
+        }
+
+
+        $scope.eliminarNodo = function () {
+            if ($scope.nodo) {
                 DriverService.eliminarNodo($scope.nodo);
             }
         }
@@ -78,7 +125,9 @@
         $scope.title = 'Titulo Dashboard 3';
         $scope.message = 'Indicaciones';
         $scope.busqueda = 0;
-
+        $scope.addInverter = function () {
+            
+        }
 
     });
 
@@ -229,15 +278,15 @@
         this.buildGraph = function (nodes, edges) {
 
             var graph = [];
-            var total = nodes[nodes.length-1].id;
-            if(total)
-            for (var i = 0; i <= total; i++) {
-                let node = [];
-                for (j = 0; j < total; j++) {
-                    node[j] = 0;
+            var total = nodes[nodes.length - 1].id;
+            if (total)
+                for (var i = 0; i <= total; i++) {
+                    let node = [];
+                    for (j = 0; j < total; j++) {
+                        node[j] = 0;
+                    }
+                    graph[i] = node;
                 }
-                graph[i] = node;
-            }
 
             for (i = 0; i < edges.length; i++) {
                 graph[edges[i].from][edges[i].to] = parseInt(edges[i].label);
@@ -343,23 +392,22 @@
                     label: peso
                 });
 
-                
-            }
-            else{
-                for(i = 0; i<this.edges.length; i++){
-                    if(((this.edges[i].from === origen)&&(this.edges[i].to === destino))||
-                      ((this.edges[i].to === origen)&&(this.edges[i].from === destino))){
+
+            } else {
+                for (i = 0; i < this.edges.length; i++) {
+                    if (((this.edges[i].from === origen) && (this.edges[i].to === destino)) ||
+                        ((this.edges[i].to === origen) && (this.edges[i].from === destino))) {
                         this.edges[i].peso = peso;
-                        
+
                     }
                 }
             }
             var container = document.getElementById('graph');
-                var data = {
-                    nodes: this.nodes,
-                    edges: this.edges,
-                };
-            
+            var data = {
+                nodes: this.nodes,
+                edges: this.edges,
+            };
+
             var graph = new vis.Network(container, data, {});
 
         }
@@ -435,16 +483,16 @@
             //console.log("hola");
             return matriz;
         }
-        
+
         this.eliminarNodo = function (n) {
-            for(i = 0; i<this.nodes.length; i++){
-                if(this.nodes[i].label === n){
-                    this.nodes.splice(i,1);                    
+            for (i = 0; i < this.nodes.length; i++) {
+                if (this.nodes[i].label === n) {
+                    this.nodes.splice(i, 1);
                 }
             }
-            for(i = 0; i<this.edges.length; i++){
-                if((this.edges[i].to === n)||(this.edges[i].from === n)){
-                    this.edges.splice(i,1);
+            for (i = 0; i < this.edges.length; i++) {
+                if ((this.edges[i].to === n) || (this.edges[i].from === n)) {
+                    this.edges.splice(i, 1);
                 }
             }
             this.mostrar(true);
@@ -599,42 +647,42 @@
                 }
             }
         }
-        
-        this.printLists = function (abiertos, cerrados){
+
+        this.printLists = function (abiertos, cerrados) {
             var lista = [];
-            for(i = 0; i<abiertos.length; i++){
+            for (i = 0; i < abiertos.length; i++) {
                 lista.push(this.toLabel(abiertos[i]));
             }
-            console.log("Nodos abiertos: "+lista.toString());
+            console.log("Nodos abiertos: " + lista.toString());
             lista = [];
-            for(i = 0; i<cerrados.length; i++){
-                if(cerrados[i]){
+            for (i = 0; i < cerrados.length; i++) {
+                if (cerrados[i]) {
                     lista.push(this.toLabel(i));
                 }
             }
-            console.log("Nodos cerrados: "+lista.toString());
+            console.log("Nodos cerrados: " + lista.toString());
         }
 
-        this.printListsB = function (abiertos, cerrados){
-            var lista = [];
-            for(i = 0; i<abiertos.length; i++){
-                lista.push(this.toLabel(abiertos[i].node));
-            }
-            console.log("Nodos abiertos: "+lista.toString());
-            lista = [];
-            for(i = 0; i<cerrados.length; i++){
-                if(cerrados[i]){
-                    lista.push(this.toLabel(i));
+        this.printListsB = function (abiertos, cerrados) {
+                var lista = [];
+                for (i = 0; i < abiertos.length; i++) {
+                    lista.push(this.toLabel(abiertos[i].node));
                 }
+                console.log("Nodos abiertos: " + lista.toString());
+                lista = [];
+                for (i = 0; i < cerrados.length; i++) {
+                    if (cerrados[i]) {
+                        lista.push(this.toLabel(i));
+                    }
+                }
+                console.log("Nodos cerrados: " + lista.toString());
             }
-            console.log("Nodos cerrados: "+lista.toString());
-        }
-        /*
-            Se necesita un grafo bidireccional para hacer el recorrido, esta función transforma el formato de grafo de vis.js (unidireccional) a bidireccional.
-            Este grafo inserta el peso de los arcos donde hay un camino, de tomar este caso no se permitiria asignar un peso de 0.    
-            nodes = lista de nodos (arreglo de JSON usado en vis.js)
-            edges = lista de arcos (arreglo de JSON usado en vis.js)
-        */
+            /*
+                Se necesita un grafo bidireccional para hacer el recorrido, esta función transforma el formato de grafo de vis.js (unidireccional) a bidireccional.
+                Este grafo inserta el peso de los arcos donde hay un camino, de tomar este caso no se permitiria asignar un peso de 0.    
+                nodes = lista de nodos (arreglo de JSON usado en vis.js)
+                edges = lista de arcos (arreglo de JSON usado en vis.js)
+            */
 
 
 
@@ -662,7 +710,7 @@
             while (stack.length) {
                 node = stack.pop();
                 if (node === goal) {
-                    this.printLists(stack,visited);
+                    this.printLists(stack, visited);
                     this.mark(nodes, goal);
                     return {
                         nodes: nodes,
@@ -719,12 +767,12 @@
                 current = queue.shift();
                 if (current === targetNode) {
                     this.mark(nodes, targetNode);
-                    this.printLists(queue,visited);
+                    this.printLists(queue, visited);
                     return {
                         nodes: nodes,
                         edges: edges
                     };
-                    
+
                 }
                 for (var i = 0; i < graph.length; i += 1) {
                     if (i !== current && graph[current][i] && !visited[i]) {
@@ -790,7 +838,7 @@
                             });
                             if (destination === target) {
                                 this.mark(nodes, target);
-                                this.printLists(stack,visited);
+                                this.printLists(stack, visited);
                                 return {
                                     nodes: nodes,
                                     edges: edges
@@ -810,7 +858,7 @@
                 stack.pop();
                 depth--;
             }
-            this.printLists(stack,visited);
+            this.printLists(stack, visited);
             return {
                 nodes: [{
                     id: 0,
@@ -879,9 +927,9 @@
                     this.mark(nodesA, result);
                     this.mark(nodesB, result);
                     console.log("Desde el inicio:");
-                    this.printLists(queueA,visitedA);
+                    this.printLists(queueA, visitedA);
                     console.log("Desde el final:")
-                    this.printLists(queueB,visitedB);
+                    this.printLists(queueB, visitedB);
                     return [{
                         nodes: nodesA,
                         edges: edgesA
@@ -893,9 +941,9 @@
                 result = this.pathExistsBidirectionalHelper(graph, queueB, visitedB, visitedA, nodesB, edgesB);
                 if (result) {
                     console.log("Desde el inicio:");
-                    this.printLists(queueA,visitedA);
+                    this.printLists(queueA, visitedA);
                     console.log("Desde el final:")
-                    this.printLists(queueB,visitedB);
+                    this.printLists(queueB, visitedB);
                     this.mark(nodesA, result);
                     this.mark(nodesB, result);
                     return [{
@@ -999,7 +1047,7 @@
                 cost = temp.cost;
                 if (node == goal) {
                     this.mark(nodes, goal + '-' + cost);
-                    this.printListsB(queue,visited);
+                    this.printListsB(queue, visited);
                     return {
                         nodes: nodes,
                         edges: edges
@@ -1065,7 +1113,7 @@
                 node = stack.shift().node;
                 if (node === goal) {
                     this.mark(nodes, goal);
-                    this.printListsB(stack,visited);
+                    this.printListsB(stack, visited);
                     return {
                         nodes: nodes,
                         edges: edges
@@ -1118,7 +1166,7 @@
                 cost = currentNode.cost;
                 if (node == end) {
                     this.mark(nodes, end);
-                    this.printListsB(openList,closedList);
+                    this.printListsB(openList, closedList);
                     return {
                         nodes: nodes,
                         edges: edges
@@ -1213,7 +1261,7 @@
                 node = stack.shift().node;
                 if (node === goal) {
                     this.mark(nodes, goal);
-                    this.printListsB(stack,visited);
+                    this.printListsB(stack, visited);
                     return {
                         nodes: nodes,
                         edges: edges
@@ -1238,7 +1286,7 @@
                 }
                 stack.push(pStack.shift());
             }
-            this.printListsB(stack,visited);
+            this.printListsB(stack, visited);
             return {
                 nodes: [{
                     id: 0,
