@@ -60,29 +60,29 @@ public class MainActivity extends AppCompatActivity {
 
     //**********************************************************************************************
     // Clase para la tarea asincronica de Gson en Servicio REST
-    private class TaskServicioREST extends AsyncTask<String, Void, String> {
+    private class TaskServicioREST extends AsyncTask<String, Void, Response> {
         // La tarea se ejecuta en un thread tomando como parametro el eviado en
         //   AsyncTask.execute()
         @Override
-        protected String doInBackground(String... urls) {
-            /*try {
+        protected Response doInBackground(String... urls) {
+            try {
                 final String url =
                         URL_REST;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add( new
                         MappingJackson2HttpMessageConverter());
-                Pais pais = restTemplate.getForObject(url ,
-                        Pais.class ) ;
+                Response pais = restTemplate.getForObject(url ,
+                        Response.class ) ;
                 return pais;
             } catch (Exception e) {
                 Log.e(" MainActivity ", e.getMessage(), e);
             }
-            return null ;*/
-            return loadContentFromNetwork(urls[0]);
+            return null ;
+            //return loadContentFromNetwork(urls[0]);
         }
 
         // El resultado de la tarea tiene el archivo gson el cual mostramos
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Response result) {
             //TextView mDataText = (TextView) findViewById(R.id.mDataText);
             //String msg = result.getName();
             mDataText.append("\n\n" + result);
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Gson mJson = new Gson();
-                mJson.fromJson(strBuilder.toString(),Result.class);//,YourClass.class);
+                mJson.fromJson(strBuilder.toString(),Response.class);//,YourClass.class);
 
                 return mJson.toString(); //strBuilder.toString();
                 //return strBuilder.toString();
@@ -114,14 +114,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class Result{
-        private String result;
+    class Response{
+        private Result result;
 
-        public String getResult() {
+        public Response(Result result) {
+            this.result = result;
+        }
+
+        public Result getResult() {
             return result;
         }
 
-        public void setResult(String result) {
+        public void setResult(Result result) {
+            this.result = result;
+        }
+    }
+
+    class Result{
+        private ArrayList<String> messages;
+        private ArrayList<Pais> result;
+
+        public Result(ArrayList<String> messages, ArrayList<Pais> result) {
+            this.messages = messages;
+            this.result = result;
+        }
+
+        public ArrayList<String> getMessages() {
+            return messages;
+        }
+
+        public void setMessages(ArrayList<String> messages) {
+            this.messages = messages;
+        }
+
+        public ArrayList<Pais> getResult() {
+            return result;
+        }
+
+        public void setResult(ArrayList<Pais> result) {
             this.result = result;
         }
     }
