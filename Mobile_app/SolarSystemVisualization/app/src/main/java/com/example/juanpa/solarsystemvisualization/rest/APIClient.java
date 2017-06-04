@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient extends Object {
 
-    public static final String BASE_URL="http://10.198.2.220:3000/server/";
+    public static final String BASE_URL="http://192.168.1.127:3000/server/";
     public static Retrofit retrofit=null;
 
     public static Retrofit getClient(){

@@ -153,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
                             bundle.putString("nPaneles","N. Paneles: "+nPaneles+"\n");
                             bundle.putString("orientacion","Orientación: "+orientacion+"\n");
                             bundle.putString("inclinacion","Inclinación: "+inclinacion+"\n");
-                            //Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
 
                             Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
                             login_intent.putExtras(bundle);
@@ -167,11 +167,13 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-
+                        Toast.makeText(getApplicationContext(), t.getMessage()   , Toast.LENGTH_LONG).show();
                     }
                 });
                 //call
-
+                /*Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
+                login_intent.putExtras(bundle);
+                startActivity(login_intent);*/
             }
         }
     }
