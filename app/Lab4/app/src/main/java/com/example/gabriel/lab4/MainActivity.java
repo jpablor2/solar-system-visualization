@@ -1,20 +1,29 @@
 package com.example.gabriel.lab4;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String URL_REST = "http://services.groupkt.com/country/get/all";
     private TextView mDataText;
 
+
     List<Pais> model=new ArrayList<Pais>();
     CountryAdapter adapter=null;
 
@@ -39,53 +49,55 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ListView list=(ListView)findViewById(R.id.paises);
+
+
         mDataText = (TextView) findViewById(R.id.mDataText);
         adapter = new CountryAdapter();
         list.setAdapter(adapter);
-        Pais r=new Pais();
-        r.setName("Costa Rica");
-        r.setAlpha2_code("CR");
-        r.setAlpha3_code("CRI");
-        adapter.add(r);
+        list.setOnItemLongClickListener(onListLongClick);
+        list.setOnItemClickListener(onlistClick);
         servicioREST();
+
     }
 
     private void servicioREST() {
         mDataText.setText("/*/ Llamada a web service REST /*/ \n");
         //
-        mDataText.setText(URL_REST);
+        mDataText.setText("Recuperando datos de: "+URL_REST);
         // Tarea AsyncTask para ejecutar la solicitud
         new TaskServicioREST().execute(URL_REST);
     }
 
     //**********************************************************************************************
     // Clase para la tarea asincronica de Gson en Servicio REST
-    private class TaskServicioREST extends AsyncTask<String, Void, Response> {
+    private class TaskServicioREST extends AsyncTask<String, Void, String> {
         // La tarea se ejecuta en un thread tomando como parametro el eviado en
         //   AsyncTask.execute()
         @Override
-        protected Response doInBackground(String... urls) {
-            try {
-                final String url =
-                        URL_REST;
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add( new
-                        MappingJackson2HttpMessageConverter());
-                Response pais = restTemplate.getForObject(url ,
-                        Response.class ) ;
-                return pais;
-            } catch (Exception e) {
-                Log.e(" MainActivity ", e.getMessage(), e);
-            }
-            return null ;
-            //return loadContentFromNetwork(urls[0]);
+        protected String doInBackground(String... urls) {
+
+            return loadContentFromNetwork(urls[0]);
         }
 
         // El resultado de la tarea tiene el archivo gson el cual mostramos
-        protected void onPostExecute(Response result) {
-            //TextView mDataText = (TextView) findViewById(R.id.mDataText);
-            //String msg = result.getName();
-            mDataText.append("\n\n" + result);
+        protected void onPostExecute(String result) {
+            JSONObject js = null;
+            try {
+                js = new JSONObject(result);
+                JSONObject head = null;
+                head = js.getJSONObject("RestResponse");
+                JSONArray ar = null;
+                ar = head.getJSONArray("result");
+                for (int x = 0; x < ar.length(); x++) {
+                    String name = ar.getJSONObject(x).getString("name");
+                    String alpha2_code = ar.getJSONObject(x).getString("alpha2_code");
+                    String alpha3_code = ar.getJSONObject(x).getString("alpha3_code");
+                    Pais pais = new Pais(name, alpha2_code, alpha3_code);
+                    adapter.add(pais);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -101,58 +113,12 @@ public class MainActivity extends AppCompatActivity {
                     strBuilder.append(line);
                 }
 
-                Gson mJson = new Gson();
-                mJson.fromJson(strBuilder.toString(),Response.class);//,YourClass.class);
-
-                return mJson.toString(); //strBuilder.toString();
-                //return strBuilder.toString();
+                return strBuilder.toString();
 
             } catch (Exception e) {
                 //Log.v(TAG_IMG, e.getMessage());
             }
             return null;
-        }
-    }
-
-    class Response{
-        private Result result;
-
-        public Response(Result result) {
-            this.result = result;
-        }
-
-        public Result getResult() {
-            return result;
-        }
-
-        public void setResult(Result result) {
-            this.result = result;
-        }
-    }
-
-    class Result{
-        private ArrayList<String> messages;
-        private ArrayList<Pais> result;
-
-        public Result(ArrayList<String> messages, ArrayList<Pais> result) {
-            this.messages = messages;
-            this.result = result;
-        }
-
-        public ArrayList<String> getMessages() {
-            return messages;
-        }
-
-        public void setMessages(ArrayList<String> messages) {
-            this.messages = messages;
-        }
-
-        public ArrayList<Pais> getResult() {
-            return result;
-        }
-
-        public void setResult(ArrayList<Pais> result) {
-            this.result = result;
         }
     }
 
@@ -193,5 +159,51 @@ public class MainActivity extends AppCompatActivity {
             alpha2_code.setText(r.getAlpha2_code());
             alpha3_code.setText(r.getAlpha3_code());
         }
+    }
+
+    private static final int IMAGE_CAPTURE = 101;
+
+    private int pos = 0;
+    private AdapterView.OnItemLongClickListener onListLongClick = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pos = position;
+            startActivityForResult(intent , IMAGE_CAPTURE);
+            return false;
+        }
+    };
+
+    private AdapterView.OnItemClickListener onlistClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(MainActivity.this, CountryActivity.class);
+
+            Pais pais = adapter.getItem(position);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("pais",pais.getName());
+            bundle.putParcelableArrayList("images", pais.getImages());
+            intent.putExtras(bundle);
+
+            startActivity(intent);
+        }
+    };
+
+    protected void onActivityResult(int requestCode ,
+                                    int resultCode , Intent data) {
+
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        //Bitmap bMap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/Android/"+"foto.jpg");
+        Pais pais = adapter.getItem(pos);
+        pais.addImage(imageBitmap);
+
+        Intent intent = new Intent(MainActivity.this, CountryActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("pais",pais.getName());
+        bundle.putParcelableArrayList("images", pais.getImages());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

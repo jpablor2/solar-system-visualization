@@ -1,16 +1,34 @@
 package com.example.gabriel.lab4;
 
+import android.graphics.Bitmap;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
+
 /**
  * Created by Gabriel on 2/6/2017.
  */
 
 public class Pais {
-
+    @JsonProperty("name")
     private String name="";
-
+    @JsonProperty("alpha2_code")
     private String alpha2_code="";
-
+    @JsonProperty("alpha3_code")
     private String alpha3_code="";
+
+    private ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+
+
+    public Pais() {
+    }
+
+    public Pais(String name, String alpha2_code, String alpha3_code) {
+        this.name = name;
+        this.alpha2_code = alpha2_code;
+        this.alpha3_code = alpha3_code;
+    }
 
     public String getName() {
         return name;
@@ -34,5 +52,13 @@ public class Pais {
 
     public void setAlpha3_code(String alpha3_code) {
         this.alpha3_code = alpha3_code;
+    }
+
+    public ArrayList<Bitmap> getImages() {
+        return images;
+    }
+
+    public void addImage(Bitmap image) {
+        this.images.add(image);
     }
 }
