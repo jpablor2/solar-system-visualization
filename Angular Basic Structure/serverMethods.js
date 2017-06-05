@@ -37,7 +37,11 @@ exports.insertModulo = function (req, res) {
         }
     }, function (req2, res2) {
         var newId = res2.value.modulo;
+        var id_inversor=resource.id_inversor;
+        var id_arreglo=resource.id_arreglo;
         resource['_id'] = newId;
+        resource['id_inversor']=parseInt(resource['id_inversor']);
+        resource['id_arreglo']=parseInt(resource['id_arreglo']);
         db.collection('modulo').insert(resource, function (err, doc_res) {
             if (err) throw err;
             res.send(200, resource);
@@ -157,9 +161,11 @@ exports.getArreglo = function (req, res) {
 
 exports.getConjunto = function (req, res) {
 
-    var resource = req.body;
-
-    var id = req.body._id;
+    var resource = req.query;
+    
+    var id = req.query._id;
+    
+    console.log(typeof(id));
 
     db.collection('arreglo').findOne({
         _id: parseInt(id)
@@ -167,9 +173,10 @@ exports.getConjunto = function (req, res) {
 
         if (err) throw err;
         //res.send(200, resource);
-
+        //console.log(resource);
+        
         db.collection('modulo').find({
-            id_arreglo: req.body._id
+            id_arreglo: parseInt(req.query._id)
         }).toArray(function (err, doc_res) {
             if (err) throw err;
             if (!doc_res) console.log("No document found");
@@ -177,15 +184,15 @@ exports.getConjunto = function (req, res) {
             
             var id_inversor=doc_res[0].id_inversor;
             
+            //console.log(doc_res);
+            
             
             db.collection('inversor').findOne({
-                _id: parseInt(id_inversor)
+                _id: id_inversor
             }, function (err, inversor) {
 
                 if (err) throw err;
-                console.log(resource);
-                console.log(doc_res);
-                console.log(inversor);
+                
                 var info={
                     'id_arreglo':resource._id,
                     'tipo_conexion':resource.tipo_conexion,
@@ -206,9 +213,6 @@ exports.getConjunto = function (req, res) {
 
     });
 
-  
-
-
 }
 
 
@@ -227,3 +231,4 @@ client.connect();
 const query = client.query(
   'CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
 query.on('end', () => { client.end(); });*/
+
