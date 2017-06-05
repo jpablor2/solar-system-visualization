@@ -3,6 +3,7 @@ package com.example.juanpa.solarsystemvisualization.rest;
 
 import com.example.juanpa.solarsystemvisualization.Models.Arrays;
 import com.example.juanpa.solarsystemvisualization.Models.ArraysResponse;
+import com.example.juanpa.solarsystemvisualization.Models.Conjunto;
 import com.example.juanpa.solarsystemvisualization.Models.Inverters;
 import com.example.juanpa.solarsystemvisualization.Models.InvertersResponse;
 import com.example.juanpa.solarsystemvisualization.Models.Modules;
@@ -43,5 +44,6 @@ public interface MyApiEndpointInterface {
     @POST("getInversor")
     Call<Inverters> getInversor(@Query("_id") String _id);
 
-
+    @POST("getConjunto")
+    Call<Conjunto> getConjunto(@Query("_id") String _id);
 }
