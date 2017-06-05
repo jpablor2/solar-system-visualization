@@ -17,6 +17,9 @@ public class Conjunto {
     @SerializedName("tipo_conexion")
     @Expose
     private String tipoConexion;
+    @SerializedName("nPaneles")
+    @Expose
+    private String nPaneles;
     @SerializedName("anguloInclinacion")
     @Expose
     private String anguloInclinacion;
@@ -40,7 +43,7 @@ public class Conjunto {
     private String micro;
     @SerializedName("l_modulos")
     @Expose
-    private List<Modulo> lModulos = null;
+    private List<Modules> lModulos = null;
 
     /**
      * No args constructor for use in serialization
@@ -51,6 +54,7 @@ public class Conjunto {
 
     /**
      *
+     * @param nPaneles
      * @param maxStrings
      * @param micro
      * @param idInversor
@@ -62,10 +66,11 @@ public class Conjunto {
      * @param anguloInclinacion
      * @param anguloOrientacion
      */
-    public Conjunto(int idArreglo, String tipoConexion, String anguloInclinacion, String anguloOrientacion, int idInversor, String maxStrings, String modelo, String descripcionInv, String micro, List<Modulo> lModulos) {
+    public Conjunto(int idArreglo, String tipoConexion, String nPaneles, String anguloInclinacion, String anguloOrientacion, int idInversor, String maxStrings, String modelo, String descripcionInv, String micro, List<Modules> lModulos) {
         super();
         this.idArreglo = idArreglo;
         this.tipoConexion = tipoConexion;
+        this.nPaneles = nPaneles;
         this.anguloInclinacion = anguloInclinacion;
         this.anguloOrientacion = anguloOrientacion;
         this.idInversor = idInversor;
@@ -90,6 +95,14 @@ public class Conjunto {
 
     public void setTipoConexion(String tipoConexion) {
         this.tipoConexion = tipoConexion;
+    }
+
+    public String getNPaneles() {
+        return nPaneles;
+    }
+
+    public void setNPaneles(String nPaneles) {
+        this.nPaneles = nPaneles;
     }
 
     public String getAnguloInclinacion() {
@@ -148,11 +161,11 @@ public class Conjunto {
         this.micro = micro;
     }
 
-    public List<Modulo> getlModulos() {
+    public List<Modules> getlModulos() {
         return lModulos;
     }
 
-    public void setlModulos(List<Modulo> lModulos) {
+    public void setlModulos(List<Modules> lModulos) {
         this.lModulos = lModulos;
     }
 

@@ -6,6 +6,9 @@ package com.example.juanpa.solarsystemvisualization.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Modules {
 
     @SerializedName("_id")
@@ -118,5 +121,24 @@ public class Modules {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+
+            obj.put("_id",_id);
+            obj.put("idInversor",idInversor);
+            obj.put("idArreglo",idArreglo);
+            obj.put("pStc",pStc);
+            obj.put("pNoct",pNoct);
+            obj.put("eficiencia",eficiencia);
+            obj.put("factDesemp",factDesemp);
+            obj.put("modelo",modelo);
+            obj.put("descripcion",descripcion);
+        } catch (JSONException e) {
+            //trace("DefaultListItem.toString JSONException: "+e.getMessage());
+        }
+        return obj;
     }
 }

@@ -24,11 +24,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.example.juanpa.solarsystemvisualization.Database.Modulo;
 import com.example.juanpa.solarsystemvisualization.Models.Arrays;
 import com.example.juanpa.solarsystemvisualization.Models.ArraysResponse;
 import com.example.juanpa.solarsystemvisualization.Models.Conjunto;
 import com.example.juanpa.solarsystemvisualization.Models.Inverters;
+import com.example.juanpa.solarsystemvisualization.Models.Modules;
 import com.example.juanpa.solarsystemvisualization.rest.*;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -133,8 +137,8 @@ public class HomeActivity extends AppCompatActivity {
                 APIClient APIClient = new APIClient();
 
                 MyApiEndpointInterface apiService = APIClient.getClient().create(MyApiEndpointInterface.class);
-                String id_arreglo=contents;
-                Toast.makeText(this,"Request: "+id_arreglo, Toast.LENGTH_LONG).show();
+                final String id_arreglo=contents;
+                //Toast.makeText(this,"Request: "+id_arreglo, Toast.LENGTH_LONG).show();
                 Call<Conjunto> call = apiService.getConjunto(id_arreglo);
                 call.enqueue(new Callback<Conjunto>() {
                     @Override
@@ -145,14 +149,35 @@ public class HomeActivity extends AppCompatActivity {
                         List<Arrays> arreglos= (List<Arrays>) response.body();*/
                         if(response.body()!=null) {
                             Bundle bundle = new Bundle();
+                            String tipoConexion = response.body().getTipoConexion();
+                            String nPaneles = response.body().getNPaneles();
+                            String anguloInclinacion = response.body().getAnguloOrientacion();
+                            String anguloOrientacion= response.body().getAnguloInclinacion();
+                            int idInversor = response.body().getIdInversor();
+                            String maxStrings = response.body().getMaxStrings();
+                            String modelo = response.body().getModelo();
+                            String micro = response.body().getMicro();
+                            String descripcionInv = response.body().getDescripcionInv();
 
-                            String tipo = response.body().getTipoConexion();
-                            String orientacion = response.body().getAnguloOrientacion();
-                            String inclinacion = response.body().getAnguloInclinacion();
-                            bundle.putString("tipo","Tipo: "+ tipo +"\n");
-                            bundle.putString("orientacion","Orientación: "+orientacion+"\n");
-                            bundle.putString("inclinacion","Inclinación: "+inclinacion+"\n");
-                            Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
+                            List<Modules> lModules = response.body().getlModulos();
+
+                            JSONArray jsonArray = new JSONArray();
+                            for (int i=0; i < lModules.size(); i++) {
+                                jsonArray.put(lModules.get(i).getJSONObject());
+                            }
+
+                            bundle.putString("idArreglo","Arreglo: "+ id_arreglo +"\n");
+                            bundle.putString("tipo","Tipo: "+ tipoConexion +"\n");
+                            bundle.putString("nPaneles","N. de paneles: "+ nPaneles +"\n");
+                            bundle.putString("orientacion","Orientación: "+anguloOrientacion+"\n");
+                            bundle.putString("inclinacion","Inclinación: "+anguloInclinacion+"\n");
+                            bundle.putString("idInversor","Inversor: "+ Integer.toString(idInversor) +"\n\n");
+                            bundle.putString("maxStrings","Máx. paneles: "+ maxStrings +"\n");
+                            bundle.putString("modelo","Modelo: "+ modelo +"\n");
+                            bundle.putString("micro","Es microinversor: "+ micro +"\n");
+                            bundle.putString("descripcionInv","Descripción: "+ descripcionInv +"\n");
+                            bundle.putString("lModules",jsonArray.toString());
+                            //Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
 
                             Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
                             login_intent.putExtras(bundle);

@@ -9,6 +9,10 @@ import android.widget.Toast;
 
 import com.byga1402.solar_panel.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ResultadoActivity extends AppCompatActivity {
@@ -42,11 +46,33 @@ public class ResultadoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UnityPlayerActivity.class);
             Bundle info = getIntent().getExtras();
             Bundle bundle_unity = new Bundle();
-            bundle_unity.putString("Left","Modelo: "+in(matchesText));
-            bundle_unity.putString("Right","Arreglo:\n"+info.getString("tipo")+
+            String infoModule = "";
+            try {
+                JSONArray lModules = new JSONArray(info.getString("lModules"));
+                for(int i = 0; i<lModules.length(); i++){
+                    JSONObject obj = lModules.getJSONObject(i);
+                    if(obj.getString("_id").equals(in(matchesText))){
+                        infoModule += "P. STC: "+obj.getString("pStc")+"\n"+
+                                "P. NOCT: "+obj.getString("pNoct")+"\n"+
+                                "Eficiencia: "+obj.getString("eficiencia")+"\n"+
+                                "PF: "+obj.getString("factDesemp")+"\n"+
+                                "Modelo: "+obj.getString("modelo")+"\n"+
+                                "Descripción: "+obj.getString("descripcion")+"\n";
+                    }
+                }
+            }catch (JSONException E){
+
+            }
+            bundle_unity.putString("Left","Módulo: "+in(matchesText)+"\n\n"+infoModule);
+            bundle_unity.putString("Right",info.getString("idArreglo")+"\n"+info.getString("tipo")+
                     info.getString("nPaneles")+
                     info.getString("orientacion")+
-                    info.getString("inclinacion"));
+                    info.getString("inclinacion")+"\n"+
+                    info.getString("idInversor")+
+                    info.getString("maxStrings")+
+                    info.getString("modelo")+
+                    info.getString("descripcionInv")+
+                    info.getString("micro"));
             intent.putExtras(bundle_unity);
             //Toast.makeText(this,in(matchesText),Toast.LENGTH_LONG).show();
             startActivity(intent);
