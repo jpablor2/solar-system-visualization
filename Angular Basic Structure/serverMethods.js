@@ -97,7 +97,7 @@ exports.getInversores = function (req, res) {
 }
 exports.getInversor = function (req, res) {
     var resource = req.query;
-    console.log("id inversor " + typeof (parseInt(req.query._id)));
+    //console.log("id inversor " + typeof (parseInt(req.query._id)));
     db.collection('inversor').findOne({
         _id: parseInt(req.query._id)
     }, function (err, resource) {
@@ -144,7 +144,7 @@ exports.getArreglos = function (req, res) {
 exports.getArreglo = function (req, res) {
 
     var resource = req.query;
-    console.log(req.query);
+    //console.log(req.query);
     db.collection('arreglo').findOne({
         _id: parseInt(req.query._id)
     }, function (err, resource) {
@@ -157,10 +157,55 @@ exports.getArreglo = function (req, res) {
 
 exports.getConjunto = function (req, res) {
 
-    console.log("buscando conjunto..");
+    var resource = req.body;
 
-    
-    
+    var id = req.body._id;
+
+    db.collection('arreglo').findOne({
+        _id: parseInt(id)
+    }, function (err, resource) {
+
+        if (err) throw err;
+        //res.send(200, resource);
+
+        db.collection('modulo').find({
+            id_arreglo: req.body._id
+        }).toArray(function (err, doc_res) {
+            if (err) throw err;
+            if (!doc_res) console.log("No document found");
+            //res.send(200, doc_res);
+            
+            var id_inversor=doc_res[0].id_inversor;
+            
+            
+            db.collection('inversor').findOne({
+                _id: parseInt(id_inversor)
+            }, function (err, inversor) {
+
+                if (err) throw err;
+                console.log(resource);
+                console.log(doc_res);
+                console.log(inversor);
+                var info={
+                    'id_arreglo':resource._id,
+                    'tipo_conexion':resource.tipo_conexion,
+                    'nPaneles':resource.nPaneles,
+                    'anguloInclinacion':resource.anguloInclinacion,
+                    'anguloOrientacion':resource.anguloOrientacion,
+                    'id_inversor':inversor._id,
+                    'max_strings':inversor.max_strings,
+                    'modelo':inversor.modelo,
+                    'descripcion_inv':inversor.descripcion,
+                    'micro':inversor.micro,
+                    'l_modulos':doc_res
+                }
+                res.send(200, info);
+            });
+
+        });
+
+    });
+
     /*
     var param = req.body.filtro;
     //res.send(200,param);
@@ -178,13 +223,13 @@ exports.getConjunto = function (req, res) {
 
         } else {
             //res.send(200, doc_res);
-            db.collection('MetricasAutomoviles').aggregate([
+                db.collection('MetricasAutomoviles').aggregate([
 
-                    {
-                        '$match': {
-                            'year': parseInt(param)
-                        }
-},
+                        {
+                            '$match': {
+                                'year': parseInt(param)
+                            }
+    },
                     {
                         '$project': {
                             'year': 1,
@@ -268,10 +313,10 @@ exports.getConjunto = function (req, res) {
         }
     });
     */
-    
-    
-    
-    
+
+
+
+    /*
     var resource = req.body;
     db.collection('modulo').find().toArray(function (err, doc_res) {
         if (err) throw err;
@@ -285,7 +330,7 @@ exports.getConjunto = function (req, res) {
             res.send(200, resource);
 
         });
-    });
+    });*/
 
 
 }
