@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.juanpa.solarsystemvisualization.Models.Arrays;
 import com.example.juanpa.solarsystemvisualization.Models.ArraysResponse;
+import com.example.juanpa.solarsystemvisualization.Models.Conjunto;
 import com.example.juanpa.solarsystemvisualization.Models.Inverters;
 import com.example.juanpa.solarsystemvisualization.rest.*;
 
@@ -134,10 +135,10 @@ public class HomeActivity extends AppCompatActivity {
                 MyApiEndpointInterface apiService = APIClient.getClient().create(MyApiEndpointInterface.class);
                 String id_arreglo=contents;
                 Toast.makeText(this,"Request: "+id_arreglo, Toast.LENGTH_LONG).show();
-                Call<Arrays> call = apiService.getArreglo(id_arreglo);
-                call.enqueue(new Callback<Arrays>() {
+                Call<Conjunto> call = apiService.getConjunto(id_arreglo);
+                call.enqueue(new Callback<Conjunto>() {
                     @Override
-                    public void onResponse(Call<Arrays> call, Response<Arrays> response) {
+                    public void onResponse(Call<Conjunto> call, Response<Conjunto> response) {
 
                         response.body();
                         /*String statusCode = String.valueOf(response.code());
@@ -146,14 +147,12 @@ public class HomeActivity extends AppCompatActivity {
                             Bundle bundle = new Bundle();
 
                             String tipo = response.body().getTipoConexion();
-                            String nPaneles = response.body().getNPaneles();
                             String orientacion = response.body().getAnguloOrientacion();
                             String inclinacion = response.body().getAnguloInclinacion();
                             bundle.putString("tipo","Tipo: "+ tipo +"\n");
-                            bundle.putString("nPaneles","N. Paneles: "+nPaneles+"\n");
                             bundle.putString("orientacion","Orientación: "+orientacion+"\n");
                             bundle.putString("inclinacion","Inclinación: "+inclinacion+"\n");
-                            //Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
 
                             Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
                             login_intent.putExtras(bundle);
@@ -167,11 +166,13 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-
+                        Toast.makeText(getApplicationContext(), t.getMessage()   , Toast.LENGTH_LONG).show();
                     }
                 });
                 //call
-
+                /*Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
+                login_intent.putExtras(bundle);
+                startActivity(login_intent);*/
             }
         }
     }
