@@ -1,6 +1,7 @@
 var jsonfile = require('jsonfile');
 var express = require("express");
 var mongo = require('mongodb');
+var PythonShell = require('python-shell');
 
 var Server = mongo.Server,
     Db = mongo.Db,
@@ -37,11 +38,11 @@ exports.insertModulo = function (req, res) {
         }
     }, function (req2, res2) {
         var newId = res2.value.modulo;
-        var id_inversor=resource.id_inversor;
-        var id_arreglo=resource.id_arreglo;
+        var id_inversor = resource.id_inversor;
+        var id_arreglo = resource.id_arreglo;
         resource['_id'] = newId;
-        resource['id_inversor']=parseInt(resource['id_inversor']);
-        resource['id_arreglo']=parseInt(resource['id_arreglo']);
+        resource['id_inversor'] = parseInt(resource['id_inversor']);
+        resource['id_arreglo'] = parseInt(resource['id_arreglo']);
         db.collection('modulo').insert(resource, function (err, doc_res) {
             if (err) throw err;
             res.send(200, resource);
@@ -159,13 +160,28 @@ exports.getArreglo = function (req, res) {
 
 }
 
+exports.getImagen = function (req,res){
+    PythonShell.run('pythonMethods.py', function (err,res2) {
+        if (err) throw err;
+        console.log('finished');
+        //res2.send(200);
+        res.json({
+                success: true,
+                message: 'Image analyzed succesfully'
+            });
+    });
+    
+}
+
 exports.getConjunto = function (req, res) {
 
     var resource = req.query;
-    
+
     var id = req.query._id;
+
+    console.log(typeof (id));
+
     
-    console.log(typeof(id));
 
     db.collection('arreglo').findOne({
         _id: parseInt(id)
@@ -174,44 +190,50 @@ exports.getConjunto = function (req, res) {
         if (err) throw err;
         //res.send(200, resource);
         //console.log(resource);
-        
+
         db.collection('modulo').find({
             id_arreglo: parseInt(req.query._id)
         }).toArray(function (err, doc_res) {
             if (err) throw err;
             if (!doc_res) console.log("No document found");
             //res.send(200, doc_res);
-            
-            var id_inversor=doc_res[0].id_inversor;
-            
+
+            var id_inversor = doc_res[0].id_inversor;
+
             //console.log(doc_res);
-            
-            
+
+
             db.collection('inversor').findOne({
                 _id: id_inversor
             }, function (err, inversor) {
 
                 if (err) throw err;
-                
-                var info={
-                    'id_arreglo':resource._id,
-                    'tipo_conexion':resource.tipo_conexion,
-                    'nPaneles':resource.nPaneles,
-                    'anguloInclinacion':resource.anguloInclinacion,
-                    'anguloOrientacion':resource.anguloOrientacion,
-                    'id_inversor':inversor._id,
-                    'max_strings':inversor.max_strings,
-                    'modelo':inversor.modelo,
-                    'descripcion_inv':inversor.descripcion,
-                    'micro':inversor.micro,
-                    'l_modulos':doc_res
+
+                var info = {
+                    'id_arreglo': resource._id,
+                    'tipo_conexion': resource.tipo_conexion,
+                    'nPaneles': resource.nPaneles,
+                    'anguloInclinacion': resource.anguloInclinacion,
+                    'anguloOrientacion': resource.anguloOrientacion,
+                    'id_inversor': inversor._id,
+                    'max_strings': inversor.max_strings,
+                    'modelo': inversor.modelo,
+                    'descripcion_inv': inversor.descripcion,
+                    'micro': inversor.micro,
+                    'l_modulos': doc_res
                 }
+
+
+
                 res.send(200, info);
             });
 
         });
 
     });
+
+    
+
 
 }
 
@@ -231,4 +253,3 @@ client.connect();
 const query = client.query(
   'CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
 query.on('end', () => { client.end(); });*/
-
