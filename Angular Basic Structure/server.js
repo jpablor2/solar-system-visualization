@@ -6,6 +6,7 @@ var path = require('path');
 var jsonFile = require ('jsonfile');
 var serverMethods = require('./serverMethods');
 
+
     
     //mongoose = require('mongoose');
 
@@ -44,6 +45,9 @@ app.post('/server/insertArreglo', serverMethods.insertArreglo);
 app.get('/server/getArreglos', serverMethods.getArreglos);
 app.post('/server/getArreglo', serverMethods.getArreglo);
 app.post('/server/getConjunto', serverMethods.getConjunto);
+
+//Imagenes
+app.get('/server/analisisImg', serverMethods.getImagen);
 
 
 
