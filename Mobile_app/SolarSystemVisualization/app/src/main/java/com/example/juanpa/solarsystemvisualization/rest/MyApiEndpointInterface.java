@@ -11,12 +11,14 @@ import com.example.juanpa.solarsystemvisualization.Models.ModulesResponse;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
 
 /**
  * Created by JuanPa on 21/05/2017.
@@ -46,4 +48,8 @@ public interface MyApiEndpointInterface {
 
     @POST("getConjunto")
     Call<Conjunto> getConjunto(@Query("_id") String _id);
+
+    @GET("analisisImg")
+    @Streaming
+    Call<ResponseBody> downloadFile();
 }
