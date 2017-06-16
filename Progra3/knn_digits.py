@@ -1,4 +1,3 @@
-import time
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -19,24 +18,20 @@ test = x[:,50:100].reshape(-1,400).astype(np.float32) # Size = (2500,400)
 k = np.arange(10)
 train_labels = np.repeat(k,250)[:,np.newaxis]
 test_labels = train_labels.copy()
-print(len(train[0]))
-print(len(train_labels[0]))
+print(len(train_labels))
+
 # Initiate kNN, train the data, then test it with test data for k=1
 knn = cv2.ml.KNearest_create()
-start = time.time()
+
 knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
-end = time.time()
-training = end - start
-start = time.time()
+
 ret,result,neighbours,dist = knn.findNearest(test,k=5)
-end = time.time()
-testing = end - start
+
 # Now we check the accuracy of classification
 # For that, compare the result with test_labels and check which are wrong
 matches = result==test_labels
 correct = np.count_nonzero(matches)
 accuracy = correct*100.0/result.size
 print (accuracy)
-print ("Training time: "+str(training))
-print ("Testing time: "+str(testing))
+
 

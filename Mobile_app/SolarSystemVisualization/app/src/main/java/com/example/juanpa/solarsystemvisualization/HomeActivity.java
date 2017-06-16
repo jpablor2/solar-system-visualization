@@ -179,7 +179,7 @@ public class HomeActivity extends AppCompatActivity {
                             bundle.putString("lModules",jsonArray.toString());
                             //Toast.makeText(getApplicationContext(),"Response: "+ tipo, Toast.LENGTH_LONG).show();
 
-                            Intent login_intent = new Intent(HomeActivity.this, DownloadActivity.class);
+                            Intent login_intent = new Intent(HomeActivity.this, ResultadoActivity.class);
                             login_intent.putExtras(bundle);
                             startActivity(login_intent);
                         }
